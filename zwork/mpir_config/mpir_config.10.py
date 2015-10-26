@@ -17,7 +17,9 @@ from re import compile, search
 from collections import defaultdict
 from uuid import uuid4
 from time import sleep
+
 solution_name = 'mpir.sln'
+
 try:
   input = raw_input
 except NameError:
@@ -122,11 +124,11 @@ def find_asm(path, cf_list):
     relr = relpath(root, mpir_dir)      # path from MPIR root
     if relp == '.':                     # set C files as default
       relp = h = t = ''
-      d[''] = [ [], deepcopy(cf_list), [], [], relr ]
+      d[''] = [[], deepcopy(cf_list), [], [], relr]
     else:
       h, _ = split(relp)                # h = parent, t = this directory
       # copy defaults from this directories parent
-      d[relp] = [ deepcopy(d[h][0]), deepcopy(d[h][1]),
+      d[relp] = [deepcopy(d[h][0]), deepcopy(d[h][1]),
                  deepcopy(d[h][2]), deepcopy(d[h][3]), relr]
     for f in files:                     # for the files in this directory
       n, x = splitext(f)
@@ -169,8 +171,8 @@ def find_asm(path, cf_list):
 
 def find_src(dir_list):
   # list number from file extension
-  di = { '.h': 0, '.c': 1, '.cc': 2, '.cpp': 2, '.asm': 3, '.as': 3 }
-  list = [ [], [], [], [] ]
+  di = {'.h': 0, '.c': 1, '.cc': 2, '.cpp': 2, '.asm': 3, '.as': 3}
+  list = [[], [], [], []]
   for d in dir_list:
     for f in listdir(join(mpir_dir, d)):
       if f == '.svn':
@@ -641,6 +643,7 @@ re_guid = compile(r'\s*\"\s*' + s_guid + r'\"\s*')
 re_proj = compile(r'Project\s*\(\s*\"' + s_guid + r'\"\)\s*=\s*'
                   + s_name + r'\s*,\s*' + s_name + r'\s*,\s*\"' + s_guid + r'\"')
 re_fmap = compile(r'\s*' + s_guid + r'\s*=\s*' + s_guid)
+
 def read_solution_file(soln_name):
   fd, pd, p2f = {}, {}, {}
   solution_path = join(solution_dir, soln_name)
@@ -663,6 +666,7 @@ sol_1 = '''Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30626.0
 MinimumVisualStudioVersion = 10.0.40219.1
 '''
+
 sol_2 = '''Project("{}") = "{}", "{}", "{}"
 EndProject
 '''

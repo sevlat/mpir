@@ -124,11 +124,11 @@ def find_asm(path, cf_list):
     relr = relpath(root, mpir_dir)      # path from MPIR root
     if relp == '.':                     # set C files as default
       relp = h = t = ''
-      d[''] = [ [], deepcopy(cf_list), [], [], relr ]
+      d[''] = [[], deepcopy(cf_list), [], [], relr]
     else:
       h, _ = split(relp)                # h = parent, t = this directory
       # copy defaults from this directories parent
-      d[relp] = [ deepcopy(d[h][0]), deepcopy(d[h][1]),
+      d[relp] = [deepcopy(d[h][0]), deepcopy(d[h][1]),
                  deepcopy(d[h][2]), deepcopy(d[h][3]), relr]
     for f in files:                     # for the files in this directory
       n, x = splitext(f)
@@ -171,8 +171,8 @@ def find_asm(path, cf_list):
 
 def find_src(dir_list):
   # list number from file extension
-  di = { '.h': 0, '.c': 1, '.cc': 2, '.cpp': 2, '.asm': 3, '.as': 3 }
-  list = [ [], [], [], [] ]
+  di = {'.h': 0, '.c': 1, '.cc': 2, '.cpp': 2, '.asm': 3, '.as': 3}
+  list = [[], [], [], []]
   for d in dir_list:
     for f in listdir(join(mpir_dir, d)):
       if f == '.svn':
@@ -637,12 +637,14 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
 
 folder_guid = "{2150E333-8FDC-42A3-9474-1A3956D46DE8}"
 vcxproject_guid = "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
+
 s_guid = r'\s*(\{\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\})\s*'
 s_name = r'\s*\"([a-zA-Z][-.\\_a-zA-Z0-9]*\s*)\"\s*'
 re_guid = compile(r'\s*\"\s*' + s_guid + r'\"\s*')
 re_proj = compile(r'Project\s*\(\s*\"' + s_guid + r'\"\)\s*=\s*'
                   + s_name + r'\s*,\s*' + s_name + r'\s*,\s*\"' + s_guid + r'\"')
 re_fmap = compile(r'\s*' + s_guid + r'\s*=\s*' + s_guid)
+
 def read_solution_file(soln_name):
   fd, pd, p2f = {}, {}, {}
   solution_path = join(solution_dir, soln_name)
@@ -665,6 +667,7 @@ sol_1 = '''Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30626.0
 MinimumVisualStudioVersion = 10.0.40219.1
 '''
+
 sol_2 = '''Project("{}") = "{}", "{}", "{}"
 EndProject
 '''
@@ -760,7 +763,7 @@ if t[2] or t[3]:
     print()
 
 # prepare the generic C build
-mpn_gc = dict((('gc',[ gc_hdr_list, gc_src_list, [], [] ]),))
+mpn_gc = dict((('gc', [gc_hdr_list, gc_src_list, [], []]),))
 
 # prepare the list of Win32 builds
 mpn_32 = find_asm(mpir_dir + 'mpn/x86w', gc_src_list)
@@ -939,6 +942,7 @@ for n in n_list:
       break
   else:
     mp_dir = config
+
   proj_name = 'mpir'
   cf = config.replace('\\', '_')
 
@@ -1010,7 +1014,7 @@ if debug:
 
 if debug:
 
-  mpn_dirs =  ('mpn/generic', 'mpn/x86_64w', 'mpn/x86w' )
+  mpn_dirs =  ('mpn/generic', 'mpn/x86_64w', 'mpn/x86w')
 
   # compile a list of files in directories in 'dl' under root 'r' with extension 'p'
   def findf(r, dl, p):

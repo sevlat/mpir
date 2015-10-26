@@ -19,6 +19,7 @@ from uuid import uuid4
 from time import sleep
 
 solution_name = 'mpir.sln'
+
 try:
   input = raw_input
 except NameError:
