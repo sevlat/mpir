@@ -20,6 +20,11 @@ from time import sleep
 
 solution_name = 'mpir.sln'
 
+ms_vs_version='10'  # Studio version
+ms_ts_version='100' # Toolset version
+
+build_vc_dir_name = 'build.vc'+msvc_version
+
 try:
   input = raw_input
 except NameError:
@@ -36,14 +41,14 @@ add_prebuild = True
 add_cpp_lib = False
 
 # The path to the mpir root directory
-build_vc = 'build.vc10/'
+build_vc = build_vc_dir_name+'/'
 mpir_dir = '../'
 build_dir = mpir_dir + build_vc
 cfg_dir = './cdata'
 solution_dir = join(mpir_dir, build_vc)
 
 # paths that might include source files(*.c, *.h, *.asm)
-c_directories = ('', 'build.vc12', 'fft', 'mpf', 'mpq', 'mpz',
+c_directories = ('', build_vc_dir_name, 'fft', 'mpf', 'mpq', 'mpz',
                  'printf', 'scanf')
 
 # files that are to be excluded from the build
@@ -395,11 +400,12 @@ def vcx_library_type(plat, proj_type, outf):
   f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="Configuration">
     <ConfigurationType>{2:s}</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>{3:s}</PlatformToolset>
     </PropertyGroup>
 '''
   for pl in plat:
     for conf in ('Release', 'Debug'):
-      outf.write(f1.format(pl, conf, app_str[proj_type]))
+      outf.write(f1.format(pl, conf, app_str[proj_type], ms_ts_version))
 
 def vcx_cpp_props(outf):
 
@@ -637,6 +643,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
 
 folder_guid = "{2150E333-8FDC-42A3-9474-1A3956D46DE8}"
 vcxproject_guid = "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
+
 s_guid = r'\s*(\{\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\})\s*'
 s_name = r'\s*\"([a-zA-Z][-.\\_a-zA-Z0-9]*\s*)\"\s*'
 re_guid = compile(r'\s*\"\s*' + s_guid + r'\"\s*')
@@ -762,7 +769,7 @@ if t[2] or t[3]:
     print()
 
 # prepare the generic C build
-mpn_gc = dict((('gc',[ gc_hdr_list, gc_src_list, [], [] ]),))
+mpn_gc = dict((('gc', [gc_hdr_list, gc_src_list, [], []]),))
 
 # prepare the list of Win32 builds
 mpn_32 = find_asm(mpir_dir + 'mpn/x86w', gc_src_list)
@@ -941,6 +948,7 @@ for n in n_list:
       break
   else:
     mp_dir = config
+
   proj_name = 'mpir'
   cf = config.replace('\\', '_')
 
@@ -1012,7 +1020,7 @@ if debug:
 
 if debug:
 
-  mpn_dirs =  ('mpn/generic', 'mpn/x86_64w', 'mpn/x86w' )
+  mpn_dirs =  ('mpn/generic', 'mpn/x86_64w', 'mpn/x86w')
 
   # compile a list of files in directories in 'dl' under root 'r' with extension 'p'
   def findf(r, dl, p):
@@ -1023,7 +1031,7 @@ if debug:
         if '.svn' in dirs:
           dirs.remove('.svn')            # ignore SVN directories
         if d == '' or root.endswith(build_vc):
-          for d in reversed(dirs):       # don't scan build.vc10 subdirectories
+          for d in reversed(dirs):       # don't scan own build.vcNN subdirectories
             dirs.remove(d)
         for f in files:
           if f.endswith(p):

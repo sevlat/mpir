@@ -20,6 +20,11 @@ from time import sleep
 
 solution_name = 'mpir.sln'
 
+ms_vs_version='11'   # Studio version
+ms_ts_version='v110' # Toolset version
+
+build_vc_dir_name = 'build.vc'+msvc_version
+
 try:
   input = raw_input
 except NameError:
@@ -36,14 +41,14 @@ add_prebuild = True
 add_cpp_lib = False
 
 # The path to the mpir root directory
-build_vc = 'build.vc11/'
+build_vc = build_vc_dir_name+'/'
 mpir_dir = '../'
 build_dir = mpir_dir + build_vc
 cfg_dir = './cdata'
 solution_dir = join(mpir_dir, build_vc)
 
 # paths that might include source files(*.c, *.h, *.asm)
-c_directories = ('', 'build.vc12', 'fft', 'mpf', 'mpq', 'mpz',
+c_directories = ('', build_vc_dir_name, 'fft', 'mpf', 'mpq', 'mpz',
                  'printf', 'scanf')
 
 # files that are to be excluded from the build
@@ -394,12 +399,12 @@ def vcx_library_type(plat, proj_type, outf):
 
   f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="Configuration">
     <ConfigurationType>{2:s}</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>{3:s}</PlatformToolset>
     </PropertyGroup>
 '''
   for pl in plat:
     for conf in ('Release', 'Debug'):
-      outf.write(f1.format(pl, conf, app_str[proj_type]))
+      outf.write(f1.format(pl, conf, app_str[proj_type], ms_ts_version))
 
 def vcx_cpp_props(outf):
 
@@ -1025,7 +1030,7 @@ if debug:
         if '.svn' in dirs:
           dirs.remove('.svn')            # ignore SVN directories
         if d == '' or root.endswith(build_vc):
-          for d in reversed(dirs):       # don't scan build.vc11 subdirectories
+          for d in reversed(dirs):       # don't scan own build.vcNN subdirectories
             dirs.remove(d)
         for f in files:
           if f.endswith(p):
