@@ -5,10 +5,10 @@
 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <PropertyGroup>
-    <MPIR_Conftype Condition="'$(ConfigurationType)' == 'StaticLibrary'" >lib</MPIR_Conftype>
-    <MPIR_Conftype Condition="'$(ConfigurationType)' == 'DynamicLibrary'">dll</MPIR_Conftype>
-  </PropertyGroup>
+  <ImportGroup>
+    <Import Project="sys.vars.props" />
+  </ImportGroup>
+
 
   <PropertyGroup>
     <!-- MsvcverDir - build.vc10, build.vc11 etc. -->
