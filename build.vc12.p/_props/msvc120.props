@@ -6,11 +6,6 @@
     <TargetName>mpir</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup>
-    <PostBuildEvent>
-      <Command>cd ..\
-postbuild "$(TargetPath)"
-    </Command>
-    </PostBuildEvent>
     <ClCompile>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <IntrinsicFunctions>true</IntrinsicFunctions>

@@ -10,6 +10,11 @@
     <ClCompile>
       <ObjectFileName>$(IntDir)One\Two\%(RelativeDir)</ObjectFileName>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>cd ..\
+postbuild "$(TargetPath)"
+    </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>
