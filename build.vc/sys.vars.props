@@ -10,8 +10,4 @@
     <MPIR_Conftype Condition="'$(ConfigurationType)' == 'DynamicLibrary'">dll</MPIR_Conftype>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <MPIR_Is_Cpp>$(ProjectName.ToLower().EndsWith('_cxx'))</MPIR_Is_Cpp>
-  </PropertyGroup>
-
 </Project>
