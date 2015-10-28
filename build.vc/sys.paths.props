@@ -32,13 +32,22 @@
   </PropertyGroup>
 
   <!-- PropsPrefix contain only part of PropertySheet path: Absolute path to directory and first part of file name -->
+
+  <PropertyGroup>
+    <!-- Imported BEFORE others props-->
+    <!-- Property sheets specific for each project.-->
+    <MPIR_ProjectPrePropsPrefix>$(MPIR_ProjectDir)_project</MPIR_ProjectPrePropsPrefix>
+
+    <MPIR_ProjectPreProps      >$(MPIR_ProjectPrePropsPrefix).props</MPIR_ProjectPreProps>
+  </PropertyGroup>
+
   <PropertyGroup>
     <!-- Property sheets specific for each project. -->
-    <MPIR_ProjectPropsPrefix>$(MPIR_ProjectDir)project</MPIR_ProjectPropsPrefix>
+    <MPIR_ProjectPropsPrefix   >$(MPIR_ProjectDir)project</MPIR_ProjectPropsPrefix>
 
     <MPIR_ProjectProps           >$(MPIR_ProjectPropsPrefix).props</MPIR_ProjectProps>
-  	<MPIR_ProjectConfProps       >$(MPIR_ProjectPropsPrefix).$(_MPIR_ConfLow).props</MPIR_ProjectConfProps>
-  	<MPIR_ProjectPlatfProps      >$(MPIR_ProjectPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_ProjectPlatfProps>
+    <MPIR_ProjectConfProps       >$(MPIR_ProjectPropsPrefix).$(_MPIR_ConfLow).props</MPIR_ProjectConfProps>
+    <MPIR_ProjectPlatfProps      >$(MPIR_ProjectPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_ProjectPlatfProps>
   </PropertyGroup>
 
   <PropertyGroup>

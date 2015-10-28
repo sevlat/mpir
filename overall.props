@@ -2,11 +2,26 @@
 <!-- Copyright 2015 Sergey Taymanov -->
 
 <!-- Import existing property sheets -->
+<!--
+  Properties MPIR_ExternalPreProps and MPIR_ExternalProps allow user to attach his own PropertySheets.
+
+  For example, these properties may be defined in MBBUILD command line.
+  -->
 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup>
     <Import Project="build.vc\sys.paths.props" />
   </ImportGroup>
+
+
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_ExternalPreProps)')"        Project="$(MPIR_ExternalPreProps)"           />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_ProjectPreProps)')"         Project="$(MPIR_ProjectPreProps)"            />
+  </ImportGroup>
+
 
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(MPIR_CommonProps)')"             Project="$(MPIR_CommonProps)"                />
