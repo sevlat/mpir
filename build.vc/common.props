@@ -9,7 +9,6 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <ObjectFileName>$(IntDir)One\Two\%(RelativeDir)</ObjectFileName>
-      <RuntimeLibrary>$(MPIR_RuntimeLibrary)</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
