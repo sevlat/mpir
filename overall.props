@@ -9,6 +9,7 @@
     <Import Condition="exists('$(MPIR_CommonConftypeProps)')"  Project="$(MPIR_CommonConftypeProps)" />
     <Import Condition="exists('$(MPIR_CommonConfProps)')"      Project="$(MPIR_CommonConfProps)"     />
     <Import Condition="exists('$(MPIR_CommonPlatfProps)')"     Project="$(MPIR_CommonPlatfProps)"    />
+    <Import Condition="exists('$(MPIR_CommonConftypeConfProps)')" Project="$(MPIR_CommonConftypeConfProps)"    />
 
     <Import Condition="exists('$(MPIR_MsvcverProps)')"         Project="$(MPIR_MsvcverProps)"        />
     <Import Condition="exists('$(MPIR_MsvcverConftypeProps)')" Project="$(MPIR_MsvcverConftypeProps)"/>
@@ -18,6 +19,8 @@
     <Import Condition="exists('$(MPIR_ProjectProps)')"         Project="$(MPIR_ProjectProps)"        />
     <Import Condition="exists('$(MPIR_ProjectConfProps)')"     Project="$(MPIR_ProjectConfProps)"    />
     <Import Condition="exists('$(MPIR_ProjectPlatfProps)')"    Project="$(MPIR_ProjectPlatfProps)"   />
+
+    <Import Condition="exists('$(MPIR_ExternalProps)')"        Project="$(MPIR_ExternalProps)"       />
   </ImportGroup>
 
 </Project>

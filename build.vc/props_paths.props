@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!-- MsvcverDir - build.vc11, build.vc11 etc. -->
+    <!-- MsvcverDir - build.vc10, build.vc11 etc. -->
     <!-- Usually in MsBuild all directory paths has trailing slash. -->
     <!-- BareDir    - without trailing slash. BareDir required for GetDirectoryName() function  -->
 
@@ -49,6 +49,7 @@
     <MPIR_CommonConftypeProps>$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).props</MPIR_CommonConftypeProps>
     <MPIR_CommonConfProps    >$(MPIR_CommonPropsPrefix).$(Configuration.ToLower()).props</MPIR_CommonConfProps>
     <MPIR_CommonPlatfProps   >$(MPIR_CommonPropsPrefix).$(Platform.ToLower()).props</MPIR_CommonPlatfProps>
+    <MPIR_CommonConftypeConfProps>$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).$(Configuration.ToLower()).props</MPIR_CommonConftypeConfProps>
   </PropertyGroup>
 
 </Project>
