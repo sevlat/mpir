@@ -2,31 +2,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_nehalem_p", "lib_mpir_nehalem\lib_mpir_nehalem_p.vcxproj", "{0C1068B3-2F52-4B79-A355-40E07FFBFDDD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_nehalem", "lib_mpir_nehalem\lib_mpir_nehalem.vcxproj", "{0C1068B3-2F52-4B79-A355-40E07FFBFDDD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_p3_p", "dll_mpir_p3\dll_mpir_p3_p.vcxproj", "{83DB8CE3-E795-4027-BF68-56CFE19D2772}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_p3", "dll_mpir_p3\dll_mpir_p3.vcxproj", "{83DB8CE3-E795-4027-BF68-56CFE19D2772}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_cxx_p", "lib_mpir_cxx\lib_mpir_cxx_p.vcxproj", "{D6399FCD-7864-4F71-AAC4-58E120CBE89C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_cxx", "lib_mpir_cxx\lib_mpir_cxx.vcxproj", "{D6399FCD-7864-4F71-AAC4-58E120CBE89C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_core2_p", "lib_mpir_core2\lib_mpir_core2_p.vcxproj", "{DCF102C3-9C18-4F80-BB01-F7B5DD4A92F1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_core2", "lib_mpir_core2\lib_mpir_core2.vcxproj", "{DCF102C3-9C18-4F80-BB01-F7B5DD4A92F1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_gc_p", "dll_mpir_gc\dll_mpir_gc_p.vcxproj", "{FFB3C07B-9F03-4EC5-9D36-72201F8DAB85}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_gc", "dll_mpir_gc\dll_mpir_gc.vcxproj", "{FFB3C07B-9F03-4EC5-9D36-72201F8DAB85}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_gc_p", "lib_mpir_gc\lib_mpir_gc_p.vcxproj", "{D68645AB-7121-4574-8C5B-495E1E9D6E90}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_gc", "lib_mpir_gc\lib_mpir_gc.vcxproj", "{D68645AB-7121-4574-8C5B-495E1E9D6E90}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_sandybridge_p", "lib_mpir_sandybridge\lib_mpir_sandybridge_p.vcxproj", "{100372C9-64FF-416E-A643-333D40FF9D5E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_sandybridge", "lib_mpir_sandybridge\lib_mpir_sandybridge.vcxproj", "{100372C9-64FF-416E-A643-333D40FF9D5E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_k8_p", "lib_mpir_k8\lib_mpir_k8_p.vcxproj", "{0894E38F-3281-4047-A2CB-5C86D396ED44}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_k8", "lib_mpir_k8\lib_mpir_k8.vcxproj", "{0894E38F-3281-4047-A2CB-5C86D396ED44}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_core2_p", "dll_mpir_core2\dll_mpir_core2_p.vcxproj", "{BD56571F-1F50-4088-AA0B-BF6741861FB0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_core2", "dll_mpir_core2\dll_mpir_core2.vcxproj", "{BD56571F-1F50-4088-AA0B-BF6741861FB0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_k8_p", "dll_mpir_k8\dll_mpir_k8_p.vcxproj", "{74F7B4D1-6E30-45B2-89F6-3408D28134DE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_k8", "dll_mpir_k8\dll_mpir_k8.vcxproj", "{74F7B4D1-6E30-45B2-89F6-3408D28134DE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_sandybridge_p", "dll_mpir_sandybridge\dll_mpir_sandybridge_p.vcxproj", "{AD799E92-A438-4E54-A990-AEADB8B2B130}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_sandybridge", "dll_mpir_sandybridge\dll_mpir_sandybridge.vcxproj", "{AD799E92-A438-4E54-A990-AEADB8B2B130}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_p3_p", "lib_mpir_p3\lib_mpir_p3_p.vcxproj", "{C654974D-D494-4359-801D-CE4E9E664F46}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_p3", "lib_mpir_p3\lib_mpir_p3.vcxproj", "{C654974D-D494-4359-801D-CE4E9E664F46}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_nehalem_p", "dll_mpir_nehalem\dll_mpir_nehalem_p.vcxproj", "{FF49A27D-AA3A-4CB2-915B-049BEABFF214}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_nehalem", "dll_mpir_nehalem\dll_mpir_nehalem.vcxproj", "{FF49A27D-AA3A-4CB2-915B-049BEABFF214}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Win32", "Win32", "{C64EE601-D566-41E9-ABB5-9F5C3A6D3D74}"
 EndProject
