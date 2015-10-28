@@ -29,7 +29,11 @@
     <Import Condition="exists('$(MPIR_CommonConfProps)')"         Project="$(MPIR_CommonConfProps)"            />
     <Import Condition="exists('$(MPIR_CommonPlatfProps)')"        Project="$(MPIR_CommonPlatfProps)"           />
     <Import Condition="exists('$(MPIR_CommonConftypeConfProps)')" Project="$(MPIR_CommonConftypeConfProps)"    />
-    <Import Condition="exists('$(MPIR_CommonCppProps)')"          Project="$(MPIR_CommonCppProps)"    />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_CommonBuild)')    and '$(MPIR_Build)' !=''"     Project="$(MPIR_CommonBuild)"    />
+    <Import Condition="exists('$(MPIR_CommonCppProps)') and '$(MPIR_Is_Cpp)'=='True'" Project="$(MPIR_CommonCppProps)" />
   </ImportGroup>
 
   <ImportGroup Label="PropertySheets">
