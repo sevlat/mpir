@@ -8,6 +8,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
+      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ObjectFileName>$(IntDir)One\Two\%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <PostBuildEvent>
