@@ -5,7 +5,7 @@
 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup>
-    <Import Project="build.vc\props_paths.props" />
+    <Import Project="build.vc\sys.paths.props" />
   </ImportGroup>
 
   <ImportGroup Label="PropertySheets">
