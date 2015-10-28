@@ -14,16 +14,23 @@
     <Import Condition="exists('$(MPIR_CommonConfProps)')"         Project="$(MPIR_CommonConfProps)"            />
     <Import Condition="exists('$(MPIR_CommonPlatfProps)')"        Project="$(MPIR_CommonPlatfProps)"           />
     <Import Condition="exists('$(MPIR_CommonConftypeConfProps)')" Project="$(MPIR_CommonConftypeConfProps)"    />
+    <Import Condition="exists('$(MPIR_CommonCppProps)')"          Project="$(MPIR_CommonCppProps)"    />
+  </ImportGroup>
 
+  <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(MPIR_MsvcverProps)')"            Project="$(MPIR_MsvcverProps)"               />
     <Import Condition="exists('$(MPIR_MsvcverConftypeProps)')"    Project="$(MPIR_MsvcverConftypeProps)"       />
     <Import Condition="exists('$(MPIR_MsvcverConfProps)')"        Project="$(MPIR_MsvcverConfProps)"           />
     <Import Condition="exists('$(MPIR_MsvcverPlatfProps)')"       Project="$(MPIR_MsvcverPlatfProps)"          />
+  </ImportGroup>
           
+  <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(MPIR_ProjectProps)')"            Project="$(MPIR_ProjectProps)"               />
     <Import Condition="exists('$(MPIR_ProjectConfProps)')"        Project="$(MPIR_ProjectConfProps)"           />
     <Import Condition="exists('$(MPIR_ProjectPlatfProps)')"       Project="$(MPIR_ProjectPlatfProps)"          />
+  </ImportGroup>
 
+  <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(MPIR_ExternalProps)')"           Project="$(MPIR_ExternalProps)"              />
   </ImportGroup>
 

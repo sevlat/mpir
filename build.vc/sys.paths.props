@@ -60,6 +60,8 @@
     <MPIR_CommonConfProps        >$(MPIR_CommonPropsPrefix).$(_MPIR_ConfLow).props</MPIR_CommonConfProps>
     <MPIR_CommonPlatfProps       >$(MPIR_CommonPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_CommonPlatfProps>
     <MPIR_CommonConftypeConfProps>$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).$(_MPIR_ConfLow).props</MPIR_CommonConftypeConfProps>
+
+    <MPIR_CommonCppProps Condition="'$(MPIR_Is_Cpp)'=='True'">$(MPIR_CommonPropsPrefix).cpp.props</MPIR_CommonCppProps>
   </PropertyGroup>
 
 </Project>
