@@ -3,12 +3,6 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup>
-    <PreBuildEvent>
-      <Command>cd ..\
-prebuild sandybridge $(Platform)
-    </Command>
-    </PreBuildEvent>
-  </ItemDefinitionGroup>
+  <ItemDefinitionGroup />
   <ItemGroup />
 </Project>

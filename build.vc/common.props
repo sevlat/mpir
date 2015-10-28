@@ -11,6 +11,11 @@
       <ObjectFileName>$(IntDir)One\Two\%(RelativeDir)</ObjectFileName>
       <RuntimeLibrary>$(MPIR_RuntimeLibrary)</RuntimeLibrary>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>cd ..\
+prebuild $(MPIR_Build) $(Platform)
+  </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>
