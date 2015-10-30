@@ -8,6 +8,7 @@
   <PropertyGroup>
     <MPIR_Conftype Condition="'$(ConfigurationType)' == 'StaticLibrary'" >lib</MPIR_Conftype>
     <MPIR_Conftype Condition="'$(ConfigurationType)' == 'DynamicLibrary'">dll</MPIR_Conftype>
+    <MPIR_Conftype Condition="'$(ConfigurationType)' == 'Application'"   >app</MPIR_Conftype>
   </PropertyGroup>
 
 </Project>
