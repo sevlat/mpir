@@ -5,8 +5,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <YASM>
-      <Debug>true</Debug>
-      <ObjectFile>$(IntDir)mpn\</ObjectFile>
+      <IncludePaths>..\..\mpn\x86_64w\;%(IncludePaths)</IncludePaths>
     </YASM>
   </ItemDefinitionGroup>
   <ItemGroup />
