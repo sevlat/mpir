@@ -4,7 +4,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
   <ItemDefinitionGroup>
-    <ClCompile />
     <YASM>
       <Defines>DLL;%(Defines)</Defines>
     </YASM>

@@ -3,8 +3,6 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup>
-    <ClCompile />
-  </ItemDefinitionGroup>
+  <ItemDefinitionGroup />
   <ItemGroup />
 </Project>
