@@ -76,9 +76,11 @@ def IsEmptyPropsFile(sFile):
 
 sRootDir=os.path.dirname(os.getcwd())
 
+FilesToDelete=[]
 for root, dirs, files in os.walk(sRootDir):
+    if root.lower().find('templates')>=0:
+        continue
 #    print ("Directory: ", root)
-    FilesToDelete=[]
     bProjectDir=False;
     for sFile in files:
         sFullFile=os.path.join(root, sFile)
@@ -91,7 +93,6 @@ for root, dirs, files in os.walk(sRootDir):
             if IsEmptyPropsFile(sFullFile):
                 FilesToDelete.append(sFullFile)
 
-    if bProjectDir:
-        for sFile in FilesToDelete:
-            print ("Deleting file: ", sFile)
-            os.remove(sFile)
+with open("delete_empty_props_files.bat", mode='w') as f:
+    for sFile in FilesToDelete:
+        print ("del ", sFile, file=f)
