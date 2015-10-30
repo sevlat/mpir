@@ -73,6 +73,7 @@
     <MPIR_CommonBuild            >$(MPIR_CommonPropsPrefix).build.props</MPIR_CommonBuild>
     <MPIR_CommonCppProps         >$(MPIR_CommonPropsPrefix).cpp.props</MPIR_CommonCppProps>
     <MPIR_CommonAsmProps         >$(MPIR_CommonPropsPrefix).asm.props</MPIR_CommonAsmProps>
+    <MPIR_CommonAsmConftypeProps >$(MPIR_CommonPropsPrefix).asm.$(MPIR_Conftype).props</MPIR_CommonAsmConftypeProps>
   </PropertyGroup>
 
 </Project>
