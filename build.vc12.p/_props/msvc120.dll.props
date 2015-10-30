@@ -4,9 +4,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
   <ItemDefinitionGroup>
-    <ClCompile>
-      <PreprocessorDefinitions>MSC_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
+    <ClCompile />
     <YASM>
       <Defines>DLL;%(Defines)</Defines>
     </YASM>
