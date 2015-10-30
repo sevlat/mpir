@@ -38,44 +38,44 @@
     <!-- Property sheets specific for each project.-->
     <MPIR_ProjectPrePropsPrefix>$(MPIR_ProjectDir)_project</MPIR_ProjectPrePropsPrefix>
 
-    <MPIR_ProjectPreProps      >$(MPIR_ProjectPrePropsPrefix).props</MPIR_ProjectPreProps>
+    <MPIR_Props_PreProject      >$(MPIR_ProjectPrePropsPrefix).props</MPIR_Props_PreProject>
   </PropertyGroup>
 
   <PropertyGroup>
     <!-- Property sheets specific for each project. -->
     <MPIR_ProjectPropsPrefix   >$(MPIR_ProjectDir)project</MPIR_ProjectPropsPrefix>
 
-    <MPIR_ProjectProps           >$(MPIR_ProjectPropsPrefix).props</MPIR_ProjectProps>
-    <MPIR_ProjectConfProps       >$(MPIR_ProjectPropsPrefix).$(_MPIR_ConfLow).props</MPIR_ProjectConfProps>
-    <MPIR_ProjectPlatfProps      >$(MPIR_ProjectPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_ProjectPlatfProps>
+    <MPIR_Props_Project           >$(MPIR_ProjectPropsPrefix).props</MPIR_Props_Project>
+    <MPIR_Props_ProjectConf       >$(MPIR_ProjectPropsPrefix).$(_MPIR_ConfLow).props</MPIR_Props_ProjectConf>
+    <MPIR_Props_ProjectPlatf      >$(MPIR_ProjectPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_Props_ProjectPlatf>
   </PropertyGroup>
 
   <PropertyGroup>
     <!-- Property sheets specific for each Visual Studio version -->
     <MPIR_MsvcverPropsPrefix>$(MPIR_MsvcverDir)_props\msvc$(PlatformToolsetVersion)</MPIR_MsvcverPropsPrefix>
 
-    <MPIR_MsvcverProps           >$(MPIR_MsvcverPropsPrefix).props</MPIR_MsvcverProps>
-    <MPIR_MsvcverConftypeProps   >$(MPIR_MsvcverPropsPrefix).$(MPIR_Conftype).props</MPIR_MsvcverConftypeProps>
-    <MPIR_MsvcverConfProps       >$(MPIR_MsvcverPropsPrefix).$(_MPIR_ConfLow).props</MPIR_MsvcverConfProps>
-    <MPIR_MsvcverPlatfProps      >$(MPIR_MsvcverPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_MsvcverPlatfProps>
+    <MPIR_Props_Msvcver           >$(MPIR_MsvcverPropsPrefix).props</MPIR_Props_Msvcver>
+    <MPIR_Props_MsvcverConftype   >$(MPIR_MsvcverPropsPrefix).$(MPIR_Conftype).props</MPIR_Props_MsvcverConftype>
+    <MPIR_Props_MsvcverConf       >$(MPIR_MsvcverPropsPrefix).$(_MPIR_ConfLow).props</MPIR_Props_MsvcverConf>
+    <MPIR_Props_MsvcverPlatf      >$(MPIR_MsvcverPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_Props_MsvcverPlatf>
   </PropertyGroup>
 
   <PropertyGroup>
     <!-- Property sheets common for all projects. -->
     <MPIR_CommonPropsPrefix>$(MPIR_RootDir)build.vc\common</MPIR_CommonPropsPrefix>
 
-    <MPIR_CommonProps            >$(MPIR_CommonPropsPrefix).props</MPIR_CommonProps>
-    <MPIR_CommonConftypeProps    >$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).props</MPIR_CommonConftypeProps>
-    <MPIR_CommonConfProps        >$(MPIR_CommonPropsPrefix).$(_MPIR_ConfLow).props</MPIR_CommonConfProps>
-    <MPIR_CommonPlatfProps       >$(MPIR_CommonPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_CommonPlatfProps>
-    <MPIR_CommonConftypeConfProps>$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).$(_MPIR_ConfLow).props</MPIR_CommonConftypeConfProps>
+    <MPIR_Props_Common            >$(MPIR_CommonPropsPrefix).props</MPIR_Props_Common>
+    <MPIR_Props_CommonConftype    >$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).props</MPIR_Props_CommonConftype>
+    <MPIR_Props_CommonConf        >$(MPIR_CommonPropsPrefix).$(_MPIR_ConfLow).props</MPIR_Props_CommonConf>
+    <MPIR_Props_CommonPlatf       >$(MPIR_CommonPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_Props_CommonPlatf>
+    <MPIR_Props_CommonConftypeConf>$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).$(_MPIR_ConfLow).props</MPIR_Props_CommonConftypeConf>
 
-    <MPIR_CommonBuild            >$(MPIR_CommonPropsPrefix).build.props</MPIR_CommonBuild>
-    <MPIR_CommonCppProps         >$(MPIR_CommonPropsPrefix).cpp.props</MPIR_CommonCppProps>
+    <MPIR_Props_CommonBuild       >$(MPIR_CommonPropsPrefix).build.props</MPIR_Props_CommonBuild>
+    <MPIR_Props_CommonCpp         >$(MPIR_CommonPropsPrefix).cpp.props</MPIR_Props_CommonCpp>
 
-    <MPIR_CommonAsmProps         >$(MPIR_CommonPropsPrefix).asm.props</MPIR_CommonAsmProps>
-    <MPIR_CommonAsmConftypeProps >$(MPIR_CommonPropsPrefix).asm.$(MPIR_Conftype).props</MPIR_CommonAsmConftypeProps>
-    <MPIR_CommonAsmPlatfProps    >$(MPIR_CommonPropsPrefix).asm.$(_MPIR_PlatfLow).props</MPIR_CommonAsmPlatfProps>
+    <MPIR_Props_CommonAsm         >$(MPIR_CommonPropsPrefix).asm.props</MPIR_Props_CommonAsm>
+    <MPIR_Props_CommonAsmConftype >$(MPIR_CommonPropsPrefix).asm.$(MPIR_Conftype).props</MPIR_Props_CommonAsmConftype>
+    <MPIR_Props_CommonAsmPlatf    >$(MPIR_CommonPropsPrefix).asm.$(_MPIR_PlatfLow).props</MPIR_Props_CommonAsmPlatf>
   </PropertyGroup>
 
 </Project>
