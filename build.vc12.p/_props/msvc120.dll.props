@@ -3,10 +3,6 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup>
-    <YASM>
-      <Defines>DLL;%(Defines)</Defines>
-    </YASM>
-  </ItemDefinitionGroup>
+  <ItemDefinitionGroup />
   <ItemGroup />
 </Project>
