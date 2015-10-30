@@ -5,6 +5,7 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>mpir</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
