@@ -42,6 +42,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(MPIR_Has_Asm)'=='True'">
     <Import Condition="exists('$(MPIR_CommonAsmProps)')"          Project="$(MPIR_CommonAsmProps)"             />
     <Import Condition="exists('$(MPIR_CommonAsmConftypeProps)')"  Project="$(MPIR_CommonAsmConftypeProps)"     />
+    <Import Condition="exists('$(MPIR_CommonAsmPlatfProps)')"     Project="$(MPIR_CommonAsmPlatfProps)"        />
   </ImportGroup>
   
 
