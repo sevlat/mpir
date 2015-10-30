@@ -7,10 +7,6 @@
     <YASM>
       <Defines>DLL;%(Defines)</Defines>
     </YASM>
-    <Link>
-      <LargeAddressAware>true</LargeAddressAware>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>
