@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2015 Sergey Taymanov -->
+
+<!-- Import existing property sheets -->
+<!--
+  Properties MPIR_ExternalPreProps and MPIR_ExternalProps allow user to attach his own PropertySheets.
+
+  For example, these properties may be defined in MBBUILD command line.
+  -->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup>
+    <Import Project="build.vc\sys.paths.props" />
+  </ImportGroup>
+
+
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_Props_PreExternal)')"        Project="$(MPIR_Props_PreExternal)"           />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_Props_PreProject)')"         Project="$(MPIR_Props_PreProject)"            />
+  </ImportGroup>
+
+
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_Props_Common)')"             Project="$(MPIR_Props_Common)"                />
+    <Import Condition="exists('$(MPIR_Props_CommonConftype)')"     Project="$(MPIR_Props_CommonConftype)"        />
+    <Import Condition="exists('$(MPIR_Props_CommonConf)')"         Project="$(MPIR_Props_CommonConf)"            />
+    <Import Condition="exists('$(MPIR_Props_CommonPlatf)')"        Project="$(MPIR_Props_CommonPlatf)"           />
+    <Import Condition="exists('$(MPIR_Props_CommonConftypeConf)')" Project="$(MPIR_Props_CommonConftypeConf)"    />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(MPIR_Build)'!=''">
+    <Import Condition="exists('$(MPIR_Props_CommonBuild)')"        Project="$(MPIR_Props_CommonBuild)"           />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(MPIR_Is_Cpp)'=='True'">
+    <Import Condition="exists('$(MPIR_Props_CommonCpp)')"          Project="$(MPIR_Props_CommonCpp)"             />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(MPIR_Has_Asm)'=='True'">
+    <Import Condition="exists('$(MPIR_Props_CommonAsm)')"          Project="$(MPIR_Props_CommonAsm)"             />
+    <Import Condition="exists('$(MPIR_Props_CommonAsmConftype)')"  Project="$(MPIR_Props_CommonAsmConftype)"     />
+    <Import Condition="exists('$(MPIR_Props_CommonAsmPlatf)')"     Project="$(MPIR_Props_CommonAsmPlatf)"        />
+  </ImportGroup>
+  
+
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_Props_Msvcver)')"            Project="$(MPIR_Props_Msvcver)"               />
+    <Import Condition="exists('$(MPIR_Props_MsvcverConftype)')"    Project="$(MPIR_Props_MsvcverConftype)"       />
+    <Import Condition="exists('$(MPIR_Props_MsvcverConf)')"        Project="$(MPIR_Props_MsvcverConf)"           />
+    <Import Condition="exists('$(MPIR_Props_MsvcverPlatf)')"       Project="$(MPIR_Props_MsvcverPlatf)"          />
+  </ImportGroup>
+          
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_Props_Project)')"            Project="$(MPIR_Props_Project)"               />
+    <Import Condition="exists('$(MPIR_Props_ProjectConf)')"        Project="$(MPIR_Props_ProjectConf)"           />
+    <Import Condition="exists('$(MPIR_Props_ProjectPlatf)')"       Project="$(MPIR_Props_ProjectPlatf)"          />
+  </ImportGroup>
+
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(MPIR_Props_External)')"           Project="$(MPIR_Props_External)"              />
+  </ImportGroup>
+
+</Project>

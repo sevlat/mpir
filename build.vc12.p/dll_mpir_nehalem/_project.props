@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <MPIR_Build>nehalem</MPIR_Build>
+    <MPIR_Has_Asm>True</MPIR_Has_Asm>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="MPIR_Build">
+      <Value>$(MPIR_Build)</Value>
+    </BuildMacro>
+    <BuildMacro Include="MPIR_Has_Asm">
+      <Value>$(MPIR_Has_Asm)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

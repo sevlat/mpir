@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!-- Copyright 2015 Sergey Taymanov -->
+
+<!-- Setup paths to various *.props files -->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ImportGroup>
+    <Import Project="sys.vars.props" />
+  </ImportGroup>
+
+
+  <PropertyGroup>
+    <!-- MsvcverDir - build.vc10, build.vc11 etc. -->
+    <!-- Usually in MsBuild all directory paths has trailing slash. -->
+    <!-- BareDir    - without trailing slash. BareDir required for GetDirectoryName() function  -->
+
+    <MPIR_ProjectDir    >$(ProjectDir)</MPIR_ProjectDir>
+    <MPIR_ProjectBareDir>$(MPIR_ProjectDir.TrimEnd('\').TrimEnd('/').TrimEnd('\').TrimEnd('/'))</MPIR_ProjectBareDir>
+
+    <MPIR_MsvcverBareDir>$([System.IO.Path]::GetDirectoryName($(MPIR_ProjectBareDir)))</MPIR_MsvcverBareDir>
+    <MPIR_MsvcverDir    >$(MPIR_MsvcverBareDir)\</MPIR_MsvcverDir>
+
+    <MPIR_RootBareDir   >$([System.IO.Path]::GetDirectoryName($(MPIR_MsvcverBareDir)))</MPIR_RootBareDir>
+    <MPIR_RootDir       >$(MPIR_RootBareDir)\</MPIR_RootDir>
+  </PropertyGroup>
+
+  <!-- Some auxiliary properties. Prefix "_" make them invisible to Visual Studio user -->
+  <PropertyGroup>
+    <_MPIR_ConfLow >$(Configuration.ToLower())</_MPIR_ConfLow>
+    <_MPIR_PlatfLow>$(Platform.ToLower())</_MPIR_PlatfLow>
+  </PropertyGroup>
+
+  <!-- PropsPrefix contain only part of PropertySheet path: Absolute path to directory and first part of file name -->
+
+  <PropertyGroup>
+    <!-- Imported BEFORE others props-->
+    <!-- Property sheets specific for each project.-->
+    <MPIR_ProjectPrePropsPrefix>$(MPIR_ProjectDir)_project</MPIR_ProjectPrePropsPrefix>
+
+    <MPIR_Props_PreProject      >$(MPIR_ProjectPrePropsPrefix).props</MPIR_Props_PreProject>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Property sheets specific for each project. -->
+    <MPIR_ProjectPropsPrefix   >$(MPIR_ProjectDir)project</MPIR_ProjectPropsPrefix>
+
+    <MPIR_Props_Project           >$(MPIR_ProjectPropsPrefix).props</MPIR_Props_Project>
+    <MPIR_Props_ProjectConf       >$(MPIR_ProjectPropsPrefix).$(_MPIR_ConfLow).props</MPIR_Props_ProjectConf>
+    <MPIR_Props_ProjectPlatf      >$(MPIR_ProjectPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_Props_ProjectPlatf>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Property sheets specific for each Visual Studio version -->
+    <MPIR_MsvcverPropsPrefix>$(MPIR_MsvcverDir)_props\msvc$(PlatformToolsetVersion)</MPIR_MsvcverPropsPrefix>
+
+    <MPIR_Props_Msvcver           >$(MPIR_MsvcverPropsPrefix).props</MPIR_Props_Msvcver>
+    <MPIR_Props_MsvcverConftype   >$(MPIR_MsvcverPropsPrefix).$(MPIR_Conftype).props</MPIR_Props_MsvcverConftype>
+    <MPIR_Props_MsvcverConf       >$(MPIR_MsvcverPropsPrefix).$(_MPIR_ConfLow).props</MPIR_Props_MsvcverConf>
+    <MPIR_Props_MsvcverPlatf      >$(MPIR_MsvcverPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_Props_MsvcverPlatf>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Property sheets common for all projects. -->
+    <MPIR_CommonPropsPrefix>$(MPIR_RootDir)build.vc\common</MPIR_CommonPropsPrefix>
+
+    <MPIR_Props_Common            >$(MPIR_CommonPropsPrefix).props</MPIR_Props_Common>
+    <MPIR_Props_CommonConftype    >$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).props</MPIR_Props_CommonConftype>
+    <MPIR_Props_CommonConf        >$(MPIR_CommonPropsPrefix).$(_MPIR_ConfLow).props</MPIR_Props_CommonConf>
+    <MPIR_Props_CommonPlatf       >$(MPIR_CommonPropsPrefix).$(_MPIR_PlatfLow).props</MPIR_Props_CommonPlatf>
+    <MPIR_Props_CommonConftypeConf>$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).$(_MPIR_ConfLow).props</MPIR_Props_CommonConftypeConf>
+
+    <MPIR_Props_CommonBuild       >$(MPIR_CommonPropsPrefix).build.props</MPIR_Props_CommonBuild>
+    <MPIR_Props_CommonCpp         >$(MPIR_CommonPropsPrefix).cpp.props</MPIR_Props_CommonCpp>
+
+    <MPIR_Props_CommonAsm         >$(MPIR_CommonPropsPrefix).asm.props</MPIR_Props_CommonAsm>
+    <MPIR_Props_CommonAsmConftype >$(MPIR_CommonPropsPrefix).asm.$(MPIR_Conftype).props</MPIR_Props_CommonAsmConftype>
+    <MPIR_Props_CommonAsmPlatf    >$(MPIR_CommonPropsPrefix).asm.$(_MPIR_PlatfLow).props</MPIR_Props_CommonAsmPlatf>
+  </PropertyGroup>
+
+</Project>
