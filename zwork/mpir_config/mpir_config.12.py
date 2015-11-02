@@ -18,12 +18,22 @@ from collections import defaultdict
 from uuid import uuid4
 from time import sleep
 
+
+g_studio_version           = '12'            # Studio version
+g_project_tools_version    = '4.0'           # Project file ToolsVersion
+g_filters_tools_version    = '12.0'          # Filters file ToolsVersion
+g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
+g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
+
+g_character_set_line       = ''
+
+g_platform_toolset_line    = r'''
+    <PlatformToolset>v120</PlatformToolset>'''
+
+
 solution_name = 'mpir.sln'
 
-ms_vs_version='12'  # Studio version
-ms_ts_version='120' # Toolset version
-
-build_vc_dir_name = 'build.vc'+msvc_version
+build_vc_dir_name = 'build.vc{0}'.format(g_studio_version)
 
 try:
   input = raw_input
@@ -335,8 +345,8 @@ def filter_asrc(af_list, relp, outf):
 def gen_filter(name, hf_list, cf_list, af_list):
 
   f1 = r'''<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-'''
+<Project ToolsVersion="{0}" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+'''.format(g_filters_tools_version)
   f2 = r'''  <ItemGroup>
     <None Include="..\..\gmp-h.in" />
     </ItemGroup>
@@ -398,13 +408,15 @@ def vcx_default_cpp_props(outf):
 def vcx_library_type(plat, proj_type, outf):
 
   f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="Configuration">
-    <ConfigurationType>{2:s}</ConfigurationType>
-    <PlatformToolset>{3:s}</PlatformToolset>
+    <ConfigurationType>{2:s}</ConfigurationType>{platform_toolset_line}{character_set_line}
     </PropertyGroup>
 '''
+
   for pl in plat:
     for conf in ('Release', 'Debug'):
-      outf.write(f1.format(pl, conf, app_str[proj_type], ms_ts_version))
+      outf.write(f1.format(pl, conf, app_str[proj_type],
+                           platform_toolset_line=g_platform_toolset_line,
+                           character_set_line=g_character_set_line))
 
 def vcx_cpp_props(outf):
 
@@ -597,8 +609,8 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
                 is_cpp, hf_list, cf_list, af_list):
 
   f1 = r'''<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-'''
+<Project DefaultTargets="Build" ToolsVersion="{0}" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+'''.format(g_project_tools_version)
   f2 = r'''  <PropertyGroup Label="UserMacros" />
 '''
   f3 = r'''  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -668,10 +680,10 @@ def read_solution_file(soln_name):
   return fd, pd, p2f
 
 sol_1 = '''Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30626.0
+# Visual Studio {0}
+VisualStudioVersion = {1}
 MinimumVisualStudioVersion = 10.0.40219.1
-'''
+'''.format(g_sln_studio_version_short, g_sln_studio_version_long)
 
 sol_2 = '''Project("{}") = "{}", "{}", "{}"
 EndProject
