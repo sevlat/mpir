@@ -34,11 +34,11 @@ g_platform_toolset_line    = ''
 # Old command line parameters
 # These variables take info from old command line
 
-g_DoPreliminaryJobOnly= (len(argv) != 1 and not int(argv[1]) & 2)
-g_DoGetHaveList= (len(argv) == 1 or int(argv[1]) & 1)
+# g_DoPreliminaryJobOnly= (len(argv) != 1 and not int(argv[1]) & 2)
+# g_DoGetHaveList= (len(argv) == 1 or int(argv[1]) & 1)
 
-# g_DoPreliminaryJobOnly=False
-# g_DoGetHaveList=True
+g_DoPreliminaryJobOnly=False
+g_DoGetHaveList=True
 
 
 solution_name = 'mpir.sln'
