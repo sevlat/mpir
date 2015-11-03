@@ -106,7 +106,7 @@ add_cpp_lib = False
 build_vc = build_vc_dir_name+'/'
 mpir_dir = '../'
 build_dir = mpir_dir + build_vc
-cfg_dir = './cdata'
+cfg_dir = build_dir+'cdata'
 solution_dir = join(mpir_dir, build_vc)
 
 # paths that might include source files(*.c, *.h, *.asm)
@@ -844,7 +844,7 @@ mpn_64 = find_asm(mpir_dir + 'mpn/x86_64w', gc_src_list)
 syms64 = file_symbols(mpn_64)
 del mpn_64['']
 
-if g_PreliminaryJobOnly:
+if g_DoPreliminaryJobOnly:
   exit()
 
 nd_gc = len(mpn_gc)
