@@ -495,7 +495,7 @@ def vcx_user_props(plat, outf):
     for conf in ('Release', 'Debug'):
       outf.write(f1.format(pl, conf))
 
-def vcx_target_name_and_dirs(name, plat, proj_type, outf):
+def vcx_target_name(name, plat, outf):
 
   f1 = r'''  <PropertyGroup>
     <_ProjectFileVersion>10.0.21006.1</_ProjectFileVersion>
@@ -510,55 +510,13 @@ def vcx_target_name_and_dirs(name, plat, proj_type, outf):
       outf.write(f2.format(pl, conf, name))
   outf.write(f3)
 
-def yasm_options(plat, proj_type, outf):
-
-  f1 = r'''    <YASM>
-    <Defines>{0:s}</Defines>
-    <IncludePaths>..\..\mpn\x86{1:s}w\</IncludePaths>
-    <Debug>true</Debug>
-    <ObjectFile>$(IntDir)mpn\</ObjectFile>
-    </YASM>
-'''
-
-  outf.write(f1.format('DLL' if proj_type == dll_type else '', '' if plat == 'Win32' else '_64'))
-
-def vcx_pre_build(name, plat, outf):
-
-  f1 = r'''    <PreBuildEvent>
-    <Command>cd ..\
-prebuild {0:s} {1:s}
-    </Command>
-    </PreBuildEvent>
-'''
-  outf.write(f1.format(name, plat))
-
-def vcx_post_build(is_cpp, outf):
-
-  f1 = r'''
-    <PostBuildEvent>
-    <Command>cd ..\
-postbuild "$(TargetPath)"
-    </Command>
-    </PostBuildEvent>
-'''
-
-  outf.write(f1)
-
 def vcx_tool_options(config, plat, proj_type, is_cpp, af_list, outf):
 
-  f1 = r'''  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'">
-'''
-  f2 = r'''  </ItemDefinitionGroup>
+  f1 = r'''  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" />
 '''
   for pl in plat:
     for is_debug in (False, True):
       outf.write(f1.format(pl, 'Debug' if is_debug else 'Release'))
-      if add_prebuild and not is_cpp:
-        vcx_pre_build(config, pl, outf)
-      if af_list:
-        yasm_options(plat, proj_type, outf)
-      vcx_post_build(is_cpp, outf)
-      outf.write(f2)
 
 def vcx_hdr_items(hdr_list, relp, outf):
 
@@ -639,7 +597,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
       vcx_extensions(outf)
     vcx_user_props(plat, outf)
     outf.write(f2)
-    vcx_target_name_and_dirs(proj_name, plat, proj_type, outf)
+    vcx_target_name(proj_name, plat, outf)
     vcx_tool_options(config, plat, proj_type, is_cpp, af_list, outf)
     if hf_list:
       vcx_hdr_items(hf_list, relp, outf)
