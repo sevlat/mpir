@@ -522,47 +522,6 @@ def yasm_options(plat, proj_type, outf):
 
   outf.write(f1.format('DLL' if proj_type == dll_type else '', '' if plat == 'Win32' else '_64'))
 
-def compiler_options(plat, proj_type, is_debug, outf):
-
-  f1 = r'''    <ClCompile>
-    <Optimization>{0:s}</Optimization>
-    <IntrinsicFunctions>true</IntrinsicFunctions>
-    <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
-    <PreprocessorDefinitions>{1:s}%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    <RuntimeLibrary>MultiThreaded{2:s}</RuntimeLibrary>
-    <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
-    <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-    </ClCompile>
-'''
-
-  if proj_type == app_type:
-    s1 = 'DEBUG;WIN32;_CONSOLE'
-    s2 = ''
-  if proj_type == dll_type:
-    s1 = 'DEBUG;WIN32;HAVE_CONFIG_H;MSC_BUILD_DLL;'
-    s2 = 'DLL'
-  elif proj_type == lib_type:
-    s1 = 'DEBUG;WIN32;_LIB;HAVE_CONFIG_H;'
-    s2 = ''
-  else:
-    pass
-  if plat == 'x64':
-    s1 = s1 + '_WIN64;'
-  if is_debug:
-    opt, defines, crt = 'Disabled', '_' + s1, 'Debug' + s2
-  else:
-    opt, defines, crt = 'Full', 'N' + s1, s2
-  outf.write(f1.format(opt, defines, crt))
-
-def linker_options(outf):
-
-  f1 = r'''    <Link>
-    <GenerateDebugInformation>true</GenerateDebugInformation>
-    <LargeAddressAware>true</LargeAddressAware>
-    </Link>
-'''
-  outf.write(f1)
-
 def vcx_pre_build(name, plat, outf):
 
   f1 = r'''    <PreBuildEvent>
@@ -598,9 +557,6 @@ def vcx_tool_options(config, plat, proj_type, is_cpp, af_list, outf):
         vcx_pre_build(config, pl, outf)
       if af_list:
         yasm_options(plat, proj_type, outf)
-      compiler_options(pl, proj_type, is_debug, outf)
-      if proj_type != lib_type:
-        linker_options(outf)
       vcx_post_build(is_cpp, outf)
       outf.write(f2)
 
