@@ -18,17 +18,59 @@ from collections import defaultdict
 from uuid import uuid4
 from time import sleep
 
+g_studio_version='12' # Default value
 
-g_studio_version           = '10'            # Studio version
-g_project_tools_version    = '4.0'           # Project file ToolsVersion
-g_filters_tools_version    = '4.0'           # Filters file ToolsVersion
-g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
-g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
+if len(argv)>1:
+  g_studio_version=argv[1]
 
-g_character_set_line       = r'''
+if g_studio_version=='10':
+  g_project_tools_version    = '4.0'           # Project file ToolsVersion
+  g_filters_tools_version    = '4.0'           # Filters file ToolsVersion
+  g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
+  g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
+
+  g_character_set_line       = r'''
     <CharacterSet>MultiByte</CharacterSet>'''
 
-g_platform_toolset_line    = ''
+  g_platform_toolset_line    = ''
+
+elif g_studio_version=='11':
+  g_project_tools_version    = '4.0'           # Project file ToolsVersion
+  g_filters_tools_version    = '4.0'           # Filters file ToolsVersion
+  g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
+  g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
+
+  g_character_set_line       = ''
+
+  g_platform_toolset_line    = r'''
+    <PlatformToolset>v110</PlatformToolset>'''
+
+elif g_studio_version=='12':
+  g_project_tools_version    = '4.0'           # Project file ToolsVersion
+  g_filters_tools_version    = '12.0'          # Filters file ToolsVersion
+  g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
+  g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
+
+  g_character_set_line       = ''
+
+  g_platform_toolset_line    = r'''
+    <PlatformToolset>v120</PlatformToolset>'''
+
+elif g_studio_version=='14':
+  g_project_tools_version    = '14.0'          # Project file ToolsVersion
+  g_filters_tools_version    = '12.0'          # Filters file ToolsVersion
+  g_sln_studio_version_short = '14'            # Solution Visual Studio Version 
+  g_sln_studio_version_long  = '14.0.22823.1'  # Solution Visual Studio Version 
+
+  g_character_set_line       = ''
+
+  g_platform_toolset_line    = r'''
+    <PlatformToolset>v140</PlatformToolset>'''
+
+else:
+  print ('Visual Studio version ', g_studio_version, 'is not supported' );
+  exit()
+
 
 
 # Old command line parameters
