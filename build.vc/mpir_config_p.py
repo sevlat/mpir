@@ -510,7 +510,7 @@ def vcx_target_name(name, plat, outf):
       outf.write(f2.format(pl, conf, name))
   outf.write(f3)
 
-def vcx_tool_options(config, plat, proj_type, is_cpp, af_list, outf):
+def vcx_tool_options(plat, proj_type, is_cpp, af_list, outf):
 
   f1 = r'''  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" />
 '''
@@ -598,7 +598,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
     vcx_user_props(plat, outf)
     outf.write(f2)
     vcx_target_name(proj_name, plat, outf)
-    vcx_tool_options(config, plat, proj_type, is_cpp, af_list, outf)
+    vcx_tool_options(plat, proj_type, is_cpp, af_list, outf)
     if hf_list:
       vcx_hdr_items(hf_list, relp, outf)
     vcx_c_items(cf_list, plat, relp, outf)
