@@ -608,6 +608,64 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
       outf.write(f4)
     outf.write(f5)
 
+
+def write_project_props(file_name, usermacros):
+  f1 = r'''<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+'''
+
+  f2 = r'''    <{0}>{1}</{0}>
+'''
+
+  f3 = r'''  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+'''
+
+  f4 = r'''    <BuildMacro Include="{0}">
+      <Value>$({0})</Value>
+    </BuildMacro>
+'''
+
+  f5 = r'''  </ItemGroup>
+</Project>
+'''
+
+  fn = normpath(join(build_dir, file_name))
+  if len(usermacros)==0:
+    if exists(fn):
+      unlink(fn)
+    return
+
+  with open(fn, 'w') as outf:
+    outf.write(f1)
+    for um in usermacros:
+      outf.write(f2.format(um[0], um[1]))
+    outf.write(f3)
+    for um in usermacros:
+      outf.write(f4.format(um[0]))
+    outf.write(f5)
+
+
+def gen_project_props(file_name, guid, config, plat, proj_type,
+                      is_cpp, hf_list, cf_list, af_list):
+  usermacros=[]
+  if is_cpp:
+    usermacros.append(('MPIR_Is_Cpp', 'True'))
+
+  if add_prebuild and not is_cpp:
+    usermacros.append(('MPIR_Build', config))
+
+  if af_list:
+    usermacros.append(('MPIR_Has_Asm', 'True'))
+
+  write_project_props(file_name, usermacros)
+
+
+
 # add a project file to the solution
 
 folder_guid = "{2150E333-8FDC-42A3-9474-1A3956D46DE8}"
@@ -925,9 +983,12 @@ for n in n_list:
   guid = '{' + str(uuid4()) + '}'
   vcx_name = 'dll_mpir_' + cf
   vcx_path = 'dll_mpir_' + cf + '\\' + vcx_name + '.vcxproj'
+  props_path='dll_mpir_' + cf + '\\' + '_project.props'
   gen_filter(vcx_path + '.filters', hf_list,
              c_src_list + cc_src_list + mpn_f[1], af_list)
   gen_vcxproj(proj_name, vcx_path, guid, mp_dir, mode, dll_type,
+              False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
+  gen_project_props(props_path, guid, mp_dir, mode, dll_type,
               False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
   add_proj_to_sln(solution_name, '', vcx_name, vcx_path, guid)
 
@@ -935,8 +996,11 @@ for n in n_list:
   guid = '{' + str(uuid4()) + '}'
   vcx_name = 'lib_mpir_' + cf
   vcx_path = 'lib_mpir_' + cf + '\\' + vcx_name + '.vcxproj'
+  props_path='lib_mpir_' + cf + '\\' + '_project.props'
   gen_filter(vcx_path + '.filters', hf_list, c_src_list + mpn_f[1], af_list)
   gen_vcxproj(proj_name, vcx_path, guid, mp_dir, mode, lib_type,
+              False, hf_list, c_src_list + mpn_f[1], af_list)
+  gen_project_props(props_path, guid, mp_dir, mode, lib_type,
               False, hf_list, c_src_list + mpn_f[1], af_list)
   add_proj_to_sln(solution_name, '', vcx_name, vcx_path, guid)
 
@@ -948,9 +1012,11 @@ if add_cpp_lib:
   mode = ('Win32', 'x64')
   vcx_name = 'lib_mpir_cxx'
   vcx_path = 'lib_mpir_cxx\\' + vcx_name + '.vcxproj'
+  props_path='lib_mpir_cxx\\' + '_project.props'
   th = hf_list +  ('mpirxx.h',)
   gen_filter(vcx_path + '.filters', th, cc_src_list, '')
   gen_vcxproj(proj_name, vcx_path, guid, config, mode, lib_type, True, th, cc_src_list, '')
+  gen_project_props(props_path, guid, config, mode, lib_type, True, th, cc_src_list, '')
   add_proj_to_sln('mpir.sln', '', vcx_name, vcx_path, guid)
 
 # the following code is for diagnostic purposes only
