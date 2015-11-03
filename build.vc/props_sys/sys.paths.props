@@ -62,7 +62,7 @@
 
   <PropertyGroup>
     <!-- Property sheets common for all projects. -->
-    <MPIR_CommonPropsPrefix>$(MPIR_RootDir)build.vc\common</MPIR_CommonPropsPrefix>
+    <MPIR_CommonPropsPrefix>$(MPIR_RootDir)build.vc\props_common\common</MPIR_CommonPropsPrefix>
 
     <MPIR_Props_Common            >$(MPIR_CommonPropsPrefix).props</MPIR_Props_Common>
     <MPIR_Props_CommonConftype    >$(MPIR_CommonPropsPrefix).$(MPIR_Conftype).props</MPIR_Props_CommonConftype>
