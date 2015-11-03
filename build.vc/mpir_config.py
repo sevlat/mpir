@@ -31,6 +31,16 @@ g_character_set_line       = r'''
 g_platform_toolset_line    = ''
 
 
+# Old command line parameters
+# These variables take info from old command line
+
+g_DoPreliminaryJobOnly= (len(argv) != 1 and not int(argv[1]) & 2)
+g_DoGetHaveList= (len(argv) == 1 or int(argv[1]) & 1)
+
+# g_DoPreliminaryJobOnly=False
+# g_DoGetHaveList=True
+
+
 solution_name = 'mpir.sln'
 
 build_vc_dir_name = 'build.vc{0}'.format(g_studio_version)
@@ -792,7 +802,7 @@ mpn_64 = find_asm(mpir_dir + 'mpn/x86_64w', gc_src_list)
 syms64 = file_symbols(mpn_64)
 del mpn_64['']
 
-if len(argv) != 1 and not int(argv[1]) & 2:
+if g_PreliminaryJobOnly:
   exit()
 
 nd_gc = len(mpn_gc)
@@ -836,13 +846,13 @@ for n in n_list:
     mpn_f = mpn_gc[config]
   elif nd_gc < n <= nd_32:
     config = sorted(mpn_32)[n - 1 - nd_gc]
-    if len(argv) == 1 or int(argv[1]) & 1:
+    if g_DoGetHaveList:
       gen_have_list(mpn_32[config], syms32, cfg_dir)
     mode = ('Win32', )
     mpn_f = mpn_32[config]
   elif nd_32 < n <= nd_nd:
     config = sorted(mpn_64)[n - 1 - nd_32]
-    if len(argv) == 1 or int(argv[1]) & 1:
+    if g_DoGetHaveList:
       gen_have_list(mpn_64[config], syms64, cfg_dir)
     mode = ('x64', )
     mpn_f = mpn_64[config]
