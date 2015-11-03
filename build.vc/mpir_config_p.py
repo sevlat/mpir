@@ -85,7 +85,7 @@ g_DoGetHaveList=True
 
 solution_name = 'mpir.sln'
 
-build_vc_dir_name = 'build.vc{0}'.format(g_studio_version)
+build_vc_dir_name = 'build.vc{0}.p'.format(g_studio_version)
 
 try:
   input = raw_input
@@ -453,7 +453,14 @@ def vcx_globals(name, guid, outf):
 
 def vcx_default_cpp_props(outf):
 
-  f1 = r'''  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  f1 = r'''    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+'''
+  outf.write(f1)
+
+def vcx_overall_cpp_props(outf):
+
+    <Import Project="..\..\overall.props" />
+  f1 = r'''    <Import Project="..\..\overall.props" />
 '''
   outf.write(f1)
 
@@ -500,8 +507,6 @@ def vcx_target_name_and_dirs(name, plat, proj_type, outf):
     <_ProjectFileVersion>10.0.21006.1</_ProjectFileVersion>
 '''
   f2 = r'''    <TargetName Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'">{2:s}</TargetName>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'">$(Platform)\$(Configuration)\</IntDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
 '''
   f3 = r'''  </PropertyGroup>
 '''
@@ -685,6 +690,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
     vcx_proj_cfg(plat, outf)
     vcx_globals(proj_name, guid, outf)
     vcx_default_cpp_props(outf)
+    vcx_overall_cpp_props(outf)
     vcx_library_type(plat, proj_type, outf)
     vcx_cpp_props(outf)
     if af_list:
