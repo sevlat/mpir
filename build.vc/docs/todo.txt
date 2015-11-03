@@ -1,0 +1,5 @@
+1) *.bat files may be common, move them to build.vc directory?
+
+2) Rename _project.props file?
+
+
