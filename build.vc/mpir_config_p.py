@@ -579,11 +579,7 @@ def vcx_c_items(cf_list, plat, relp, outf):
 '''
   f2 = r'''    <ClCompile Include="{0:s}{1[0]:s}{1[1]:s}" />
 '''
-  f3 = r'''    <ClCompile Include="{0:s}{1[2]:s}\{1[0]:s}{1[1]:s}">
-'''
-  f4 = r'''        <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='{0:s}|{1:s}'">$(IntDir){2:s}\</ObjectFileName>
-'''
-  f5 = r'''    </ClCompile>
+  f3 = r'''    <ClCompile Include="{0:s}{1[2]:s}\{1[0]:s}{1[1]:s}" />
 '''
   f6 = r'''  </ItemGroup>
 '''
@@ -593,10 +589,7 @@ def vcx_c_items(cf_list, plat, relp, outf):
       outf.write(f2.format(relp, nxd))
     else:
       outf.write(f3.format(relp, nxd))
-      for cf in ('Release', 'Debug'):
-        for pl in plat:
-          outf.write(f4.format(cf, pl, 'mpn' if nxd[2].endswith('generic') else nxd[2]))
-      outf.write(f5)
+
   outf.write(f6)
 
 def vcx_a_items(af_list, relp, outf):
