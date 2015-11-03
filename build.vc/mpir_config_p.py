@@ -453,14 +453,7 @@ def vcx_globals(name, guid, outf):
 
 def vcx_default_cpp_props(outf):
 
-  f1 = r'''    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-'''
-  outf.write(f1)
-
-def vcx_overall_cpp_props(outf):
-
-    <Import Project="..\..\overall.props" />
-  f1 = r'''    <Import Project="..\..\overall.props" />
+  f1 = r'''  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 '''
   outf.write(f1)
 
@@ -495,7 +488,8 @@ def vcx_user_props(plat, outf):
 
   f1 = r'''  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
-    </ImportGroup>
+    <Import Project="..\..\overall.props" />
+  </ImportGroup>
 '''
   for pl in plat:
     for conf in ('Release', 'Debug'):
@@ -690,7 +684,6 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
     vcx_proj_cfg(plat, outf)
     vcx_globals(proj_name, guid, outf)
     vcx_default_cpp_props(outf)
-    vcx_overall_cpp_props(outf)
     vcx_library_type(plat, proj_type, outf)
     vcx_cpp_props(outf)
     if af_list:
