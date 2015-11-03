@@ -479,7 +479,7 @@ def vcx_cpp_props(outf):
 def vcx_extensions(outf):
 
   f1 = r'''  <ImportGroup Label="ExtensionSettings">
-    <Import Project="..\vsyasm.props" />
+    <Import Project="..\..\build.vc\vsyasm.props" />
     </ImportGroup>
 '''
   outf.write(f1)
@@ -567,7 +567,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
   f3 = r'''  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 '''
   f4 = r'''  <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\vsyasm.targets" />
+    <Import Project="..\..\build.vc\vsyasm.targets" />
     </ImportGroup>
 '''
 
