@@ -495,20 +495,13 @@ def vcx_user_props(plat, outf):
     for conf in ('Release', 'Debug'):
       outf.write(f1.format(pl, conf))
 
-def vcx_target_name(name, plat, outf):
+def vcx_file_version(outf):
 
   f1 = r'''  <PropertyGroup>
     <_ProjectFileVersion>10.0.21006.1</_ProjectFileVersion>
-'''
-  f2 = r'''    <TargetName Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'">{2:s}</TargetName>
-'''
-  f3 = r'''  </PropertyGroup>
+  </PropertyGroup>
 '''
   outf.write(f1)
-  for pl in plat:
-    for conf in ('Release', 'Debug'):
-      outf.write(f2.format(pl, conf, name))
-  outf.write(f3)
 
 def vcx_tool_options(plat, proj_type, is_cpp, af_list, outf):
 
@@ -597,7 +590,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
       vcx_extensions(outf)
     vcx_user_props(plat, outf)
     outf.write(f2)
-    vcx_target_name(proj_name, plat, outf)
+    vcx_file_version(outf)
     vcx_tool_options(plat, proj_type, is_cpp, af_list, outf)
     if hf_list:
       vcx_hdr_items(hf_list, relp, outf)
