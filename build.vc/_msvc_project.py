@@ -35,22 +35,21 @@ def vcx_default_cpp_props(outf):
 '''
   outf.write(f1)
 
-def vcx_library_type(plat, proj_type, outf):
+def vcx_library_type(plat, proj_type, app_str, tool_char_set_lines, outf):
 
   f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{arg_conf}|{arg_platf}'" Label="Configuration">
-    <ConfigurationType>{arg_conftype}</ConfigurationType>{arg_platf_toolset_line}{arg_char_set_line}
+    <ConfigurationType>{arg_conftype}</ConfigurationType>{arg_tool_char_set_lines}
     <UseDebugLibraries>{arg_is_debug}</UseDebugLibraries>
     </PropertyGroup>
 '''
 
   for pl in plat:
     for is_debug in (False, True):
-      sPG=f1.format(arg_conf              =('Debug' if is_debug else 'Release'),
-                    arg_platf             =pl,
-                    arg_conftype          =app_str[proj_type],
-                    arg_platf_toolset_line=g_platform_toolset_line,
-                    arg_char_set_line     =g_character_set_line,
-                    arg_is_debug          =('true' if is_debug else 'false'))
+      sPG=f1.format(arg_conf               =('Debug' if is_debug else 'Release'),
+                    arg_platf              =pl,
+                    arg_conftype           =app_str[proj_type],
+                    arg_tool_char_set_lines=tool_char_set_lines,
+                    arg_is_debug           =('true' if is_debug else 'false'))
 
       outf.write(sPG)
 
@@ -140,12 +139,14 @@ def vcx_a_items(af_list, relp, outf):
     outf.write(f2.format(relp, nxd))
   outf.write(f3)
 
-def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
+def gen_vcxproj(proj_name, file_name, mpir_dir, build_dir,
+                guid, config, plat, proj_type,
+                app_str, tool_char_set_lines, tools_ver,
                 is_cpp, hf_list, cf_list, af_list):
 
   f1 = r'''<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="{0}" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-'''.format(g_project_tools_version)
+'''.format(tools_ver)
   f2 = r'''  <PropertyGroup Label="UserMacros" />
 '''
   f3 = r'''  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -168,7 +169,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
     vcx_proj_cfg(plat, outf)
     vcx_globals(proj_name, guid, outf)
     vcx_default_cpp_props(outf)
-    vcx_library_type(plat, proj_type, outf)
+    vcx_library_type(plat, proj_type, app_str, tool_char_set_lines, outf)
     vcx_cpp_props(outf)
     if af_list:
       vcx_extensions(outf)
@@ -186,7 +187,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
     outf.write(f5)
 
 
-def write_project_props(file_name, usermacros):
+def write_project_props(file_name, build_dir, usermacros):
   f1 = r'''<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
@@ -227,7 +228,7 @@ def write_project_props(file_name, usermacros):
     outf.write(f5)
 
 
-def gen_project_props(file_name, guid, config, plat, proj_type,
+def gen_project_props(file_name, build_dir, guid, config, plat, proj_type, add_prebuild,
                       is_cpp, hf_list, cf_list, af_list):
   usermacros=[]
   if is_cpp:
@@ -239,5 +240,6 @@ def gen_project_props(file_name, guid, config, plat, proj_type,
   if af_list:
     usermacros.append(('MPIR_Has_Asm', 'True'))
 
-  write_project_props(file_name, usermacros)
+  write_project_props(file_name, build_dir, usermacros)
+
 

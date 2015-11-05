@@ -33,10 +33,8 @@ if g_studio_version=='10':
   g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
   g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
 
-  g_character_set_line       = r'''
+  g_tool_char_set_lines      = r'''
     <CharacterSet>MultiByte</CharacterSet>'''
-
-  g_platform_toolset_line    = ''
 
 elif g_studio_version=='11':
   g_project_tools_version    = '4.0'           # Project file ToolsVersion
@@ -44,9 +42,7 @@ elif g_studio_version=='11':
   g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
   g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
 
-  g_character_set_line       = ''
-
-  g_platform_toolset_line    = r'''
+  g_tool_char_set_lines      = r'''
     <PlatformToolset>v110</PlatformToolset>'''
 
 elif g_studio_version=='12':
@@ -55,9 +51,7 @@ elif g_studio_version=='12':
   g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
   g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
 
-  g_character_set_line       = ''
-
-  g_platform_toolset_line    = r'''
+  g_tool_char_set_lines      = r'''
     <PlatformToolset>v120</PlatformToolset>'''
 
 elif g_studio_version=='14':
@@ -66,9 +60,7 @@ elif g_studio_version=='14':
   g_sln_studio_version_short = '14'            # Solution Visual Studio Version 
   g_sln_studio_version_long  = '14.0.22823.1'  # Solution Visual Studio Version 
 
-  g_character_set_line       = ''
-
-  g_platform_toolset_line    = r'''
+  g_tool_char_set_lines      = r'''
     <PlatformToolset>v140</PlatformToolset>'''
 
 else:
@@ -320,7 +312,6 @@ def gen_have_list(c, sym_dir, out_dir):
 #     print('/* assembler symbols not available in C files */', file=outf)
 #     for sym in sorted(set_sym3):
 #       print(sym, file=outf)
-
 
 
 
@@ -646,10 +637,12 @@ for n in n_list:
              hf_list,
              c_src_list + cc_src_list + mpn_f[1], af_list,
              g_filters_tools_version)
-  gen_vcxproj(proj_name, vcx_path, guid, mp_dir, mode, dll_type,
+  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
+              guid, mp_dir, mode, dll_type,
+              app_str, g_tool_char_set_lines, g_project_tools_version,
               False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
-  gen_project_props(props_path, guid, mp_dir, mode, dll_type,
-              False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
+  gen_project_props(props_path, build_dir, guid, mp_dir, mode, dll_type, add_prebuild,
+                    False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
   add_proj_to_sln(solution_name, '', vcx_name, vcx_path, guid)
 
   # set up LIB build
@@ -660,10 +653,12 @@ for n in n_list:
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
              hf_list, c_src_list + mpn_f[1], af_list,
              g_filters_tools_version)
-  gen_vcxproj(proj_name, vcx_path, guid, mp_dir, mode, lib_type,
+  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
+              guid, mp_dir, mode, lib_type,
+              app_str, g_tool_char_set_lines, g_project_tools_version,
               False, hf_list, c_src_list + mpn_f[1], af_list)
-  gen_project_props(props_path, guid, mp_dir, mode, lib_type,
-              False, hf_list, c_src_list + mpn_f[1], af_list)
+  gen_project_props(props_path, build_dir, guid, mp_dir, mode, lib_type, add_prebuild,
+                    False, hf_list, c_src_list + mpn_f[1], af_list)
   add_proj_to_sln(solution_name, '', vcx_name, vcx_path, guid)
 
 # C++ library build
@@ -678,8 +673,12 @@ if add_cpp_lib:
   th = hf_list +  ('mpirxx.h',)
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
              th, cc_src_list, '', g_filters_tools_version)
-  gen_vcxproj(proj_name, vcx_path, guid, config, mode, lib_type, True, th, cc_src_list, '')
-  gen_project_props(props_path, guid, config, mode, lib_type, True, th, cc_src_list, '')
+  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
+              guid, config, mode, lib_type,
+              app_str, g_tool_char_set_lines, g_project_tools_version,
+              True, th, cc_src_list, '')
+  gen_project_props(props_path, build_dir, guid, config, mode, lib_type, add_prebuild,
+                    True, th, cc_src_list, '')
   add_proj_to_sln('mpir.sln', '', vcx_name, vcx_path, guid)
 
 # the following code is for diagnostic purposes only
