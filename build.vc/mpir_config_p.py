@@ -459,21 +459,22 @@ def vcx_default_cpp_props(outf):
 
 def vcx_library_type(plat, proj_type, outf):
 
-  f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="Configuration">
-    <ConfigurationType>{2:s}</ConfigurationType>{platform_toolset_line}{character_set_line}
-    <UseDebugLibraries>{3:s}</UseDebugLibraries>
+  f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{arg_conf}|{arg_platf}'" Label="Configuration">
+    <ConfigurationType>{arg_conftype}</ConfigurationType>{arg_platf_toolset_line}{arg_char_set_line}
+    <UseDebugLibraries>{arg_is_debug}</UseDebugLibraries>
     </PropertyGroup>
 '''
 
   for pl in plat:
     for is_debug in (False, True):
-      sconf    ='Debug' if is_debug else 'Release'
-      sis_debug='true'  if is_debug else 'false'
+      sPG=f1.format(arg_conf              =('Debug' if is_debug else 'Release'),
+                    arg_platf             =pl,
+                    arg_conftype          =app_str[proj_type],
+                    arg_platf_toolset_line=g_platform_toolset_line,
+                    arg_char_set_line     =g_character_set_line,
+                    arg_is_debug          =('true' if is_debug else 'false'))
 
-      outf.write(f1.format(pl, sconf, app_str[proj_type],
-                           platform_toolset_line=g_platform_toolset_line,
-                           character_set_line=g_character_set_line,
-                           sis_debug))
+      outf.write(sPG)
 
 def vcx_cpp_props(outf):
 
