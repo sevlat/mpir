@@ -1,6 +1,7 @@
 # add a project file to the solution
 
-from os.path import join
+from os.path import join, exists
+from re import compile
 
 folder_guid = "{2150E333-8FDC-42A3-9474-1A3956D46DE8}"
 vcxproject_guid = "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
@@ -12,7 +13,7 @@ re_proj = compile(r'Project\s*\(\s*\"' + s_guid + r'\"\)\s*=\s*'
                   + s_name + r'\s*,\s*' + s_name + r'\s*,\s*\"' + s_guid + r'\"')
 re_fmap = compile(r'\s*' + s_guid + r'\s*=\s*' + s_guid)
 
-def read_solution_file(soln_name):
+def read_solution_file(soln_name, solution_dir):
   fd, pd, p2f = {}, {}, {}
   solution_path = join(solution_dir, soln_name)
   if exists(solution_path):
@@ -33,7 +34,7 @@ sol_1 = '''Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio {0}
 VisualStudioVersion = {1}
 MinimumVisualStudioVersion = 10.0.40219.1
-'''.format(g_sln_studio_version_short, g_sln_studio_version_long)
+'''
 
 sol_2 = '''Project("{}") = "{}", "{}", "{}"
 EndProject
@@ -59,9 +60,9 @@ sol_5 = r'''    EndGlobalSection
 EndGlobal
 '''
 
-def write_solution_file(file_name, fd, pd, p2f):
+def write_solution_file(file_name, solution_dir, fd, pd, p2f, ver_short, ver_long):
   with open(join(solution_dir, file_name), 'w') as outf:
-    outf.write(sol_1)
+    outf.write(sol_1.format(ver_short, ver_long))
     for f, g in fd.items():
       outf.write(sol_2.format(folder_guid, f, f, g))
     for f, (g1, pn, g2) in pd.items():
@@ -71,8 +72,9 @@ def write_solution_file(file_name, fd, pd, p2f):
       outf.write(sol_4.format(f, g))
     outf.write(sol_5)
 
-def add_proj_to_sln(soln_name, soln_folder, proj_name, file_name, guid):
-  fd, pd, p2f = read_solution_file(soln_name)
+def add_proj_to_sln(soln_name, solution_dir, soln_folder, proj_name, file_name, guid,
+                    ver_short, ver_long):
+  fd, pd, p2f = read_solution_file(soln_name, solution_dir)
   if soln_folder:
     if soln_folder in fd:
       f_guid = fd[soln_folder]
@@ -83,4 +85,4 @@ def add_proj_to_sln(soln_name, soln_folder, proj_name, file_name, guid):
   if soln_folder:
     p2f[guid] = f_guid
 
-  write_solution_file(soln_name, fd, pd, p2f)
+  write_solution_file(soln_name, solution_dir, fd, pd, p2f, ver_short, ver_long)

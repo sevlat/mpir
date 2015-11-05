@@ -561,7 +561,9 @@ for n in n_list:
               False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, build_dir, guid, mp_dir, mode, dll_type, add_prebuild,
                     False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
-  add_proj_to_sln(solution_name, '', vcx_name, vcx_path, guid)
+  add_proj_to_sln(solution_name, solution_dir, '', 
+                  vcx_name, vcx_path, guid,
+                  g_sln_studio_version_short, g_sln_studio_version_long)
 
   # set up LIB build
   guid = '{' + str(uuid4()) + '}'
@@ -577,7 +579,9 @@ for n in n_list:
               False, hf_list, c_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, build_dir, guid, mp_dir, mode, lib_type, add_prebuild,
                     False, hf_list, c_src_list + mpn_f[1], af_list)
-  add_proj_to_sln(solution_name, '', vcx_name, vcx_path, guid)
+  add_proj_to_sln(solution_name, solution_dir, '', 
+                  vcx_name, vcx_path, guid,
+                  g_sln_studio_version_short, g_sln_studio_version_long)
 
 # C++ library build
 
@@ -597,7 +601,9 @@ if add_cpp_lib:
               True, th, cc_src_list, '')
   gen_project_props(props_path, build_dir, guid, config, mode, lib_type, add_prebuild,
                     True, th, cc_src_list, '')
-  add_proj_to_sln('mpir.sln', '', vcx_name, vcx_path, guid)
+  add_proj_to_sln('mpir.sln', solution_dir, '', 
+                  vcx_name, vcx_path, guid,
+                  g_sln_studio_version_short, g_sln_studio_version_long)
 
 # the following code is for diagnostic purposes only
 if debug:
