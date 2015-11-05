@@ -461,14 +461,19 @@ def vcx_library_type(plat, proj_type, outf):
 
   f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="Configuration">
     <ConfigurationType>{2:s}</ConfigurationType>{platform_toolset_line}{character_set_line}
+    <UseDebugLibraries>{3:s}</UseDebugLibraries>
     </PropertyGroup>
 '''
 
   for pl in plat:
-    for conf in ('Release', 'Debug'):
-      outf.write(f1.format(pl, conf, app_str[proj_type],
+    for is_debug in (False, True):
+      sconf    ='Debug' if is_debug else 'Release'
+      sis_debug='true'  if is_debug else 'false'
+
+      outf.write(f1.format(pl, sconf, app_str[proj_type],
                            platform_toolset_line=g_platform_toolset_line,
-                           character_set_line=g_character_set_line))
+                           character_set_line=g_character_set_line,
+                           sis_debug))
 
 def vcx_cpp_props(outf):
 
