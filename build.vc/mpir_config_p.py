@@ -18,6 +18,9 @@ from collections import defaultdict
 from uuid import uuid4
 from time import sleep
 
+from _msvc_filters import gen_filter
+
+
 g_studio_version='12' # Default value
 
 if len(argv)>1:
@@ -317,110 +320,7 @@ def gen_have_list(c, sym_dir, out_dir):
 #     for sym in sorted(set_sym3):
 #       print(sym, file=outf)
 
-# generate Visual Studio IDE Filter
 
-def filter_folders(cf_list, af_list, outf):
-
-  f1 = r'''  <ItemGroup>
-    <Filter Include="Header Files" />
-    <Filter Include="Source Files" />
-'''
-  f2 = r'''    <Filter Include="Source Files\{0:s}" />
-'''
-  f3 = r'''  </ItemGroup>
-'''
-  c_dirs = set(i[2] for i in cf_list)
-  a_dirs = set(i[2] for i in af_list)
-  if a_dirs:
-    c_dirs |= set((r'mpn\yasm',))
-  outf.write(f1)
-  for d in sorted(c_dirs):
-    if d:
-      t = d if d != r'mpn\generic' else r'mpn'
-      outf.write(f2.format(t))
-  outf.write(f3)
-
-
-def filter_headers(hdr_list, relp, outf):
-
-  f1 = r'''  <ItemGroup>
-'''
-  f2 = r'''    <ClInclude Include="{}{}">
-    <Filter>Header Files</Filter>
-    </ClInclude>
-'''
-  f3 = r'''  </ItemGroup>
-'''
-  outf.write(f1)
-  for h in hdr_list:
-    outf.write(f2.format(relp, h))
-  outf.write(f3)
-
-def filter_csrc(cf_list, relp, outf):
-
-  f1 = r'''  <ItemGroup>
-'''
-  f2 = r'''  <ClCompile Include="{}{}">
-    <Filter>Source Files</Filter>
-    </ClCompile>
-'''
-  f3 = r'''  <ClCompile Include="{}{}\{}">
-    <Filter>Source Files\{}</Filter>
-    </ClCompile>
-'''
-  f4 = r'''  </ItemGroup>
-'''
-  outf.write(f1)
-  for i in cf_list:
-    if not i[2]:
-      outf.write(f2.format(relp, i[0] + i[1]))
-    else:
-      t = 'mpn' if i[2].endswith('generic') else i[2]
-      outf.write(f3.format(relp, i[2], i[0] + i[1], t))
-  outf.write(f4)
-
-def filter_asrc(af_list, relp, outf):
-
-  f1 = r'''  <ItemGroup>
-'''
-  f2 = r'''  <YASM Include="{0:s}{2:s}\{1:s}">
-    <Filter>Source Files\mpn\yasm</Filter>
-    </YASM>
-'''
-  f3 = r'''  </ItemGroup>
-'''
-  outf.write(f1)
-  for i in af_list:
-    outf.write(f2.format(relp, i[0] + i[1], i[2], i[2]))
-  outf.write(f3)
-
-def gen_filter(name, hf_list, cf_list, af_list):
-
-  f1 = r'''<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="{0}" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-'''.format(g_filters_tools_version)
-  f2 = r'''  <ItemGroup>
-    <None Include="..\..\gmp-h.in" />
-    </ItemGroup>
-</Project>
-'''
-
-  fn = normpath(join(build_dir, name))
-  relp = split(relpath(mpir_dir, fn))[0] + '\\'
-  try:
-    makedirs(split(fn)[0])
-  except IOError:
-    pass
-  with open(fn, 'w') as outf:
-
-    outf.write(f1)
-    filter_folders(cf_list, af_list, outf)
-    if hf_list:
-      filter_headers(hf_list, relp, outf)
-    filter_csrc(cf_list, relp, outf)
-    if af_list:
-      filter_asrc(af_list, relp, outf)
-    outf.write(f2)
 
 # generate vcxproj file
 
@@ -983,8 +883,10 @@ for n in n_list:
   vcx_name = 'dll_mpir_' + cf
   vcx_path = 'dll_mpir_' + cf + '\\' + vcx_name + '.vcxproj'
   props_path='dll_mpir_' + cf + '\\' + '_project.props'
-  gen_filter(vcx_path + '.filters', hf_list,
-             c_src_list + cc_src_list + mpn_f[1], af_list)
+  gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
+             hf_list,
+             c_src_list + cc_src_list + mpn_f[1], af_list,
+             g_filters_tools_version)
   gen_vcxproj(proj_name, vcx_path, guid, mp_dir, mode, dll_type,
               False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, guid, mp_dir, mode, dll_type,
@@ -996,7 +898,9 @@ for n in n_list:
   vcx_name = 'lib_mpir_' + cf
   vcx_path = 'lib_mpir_' + cf + '\\' + vcx_name + '.vcxproj'
   props_path='lib_mpir_' + cf + '\\' + '_project.props'
-  gen_filter(vcx_path + '.filters', hf_list, c_src_list + mpn_f[1], af_list)
+  gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
+             hf_list, c_src_list + mpn_f[1], af_list,
+             g_filters_tools_version)
   gen_vcxproj(proj_name, vcx_path, guid, mp_dir, mode, lib_type,
               False, hf_list, c_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, guid, mp_dir, mode, lib_type,
@@ -1013,7 +917,8 @@ if add_cpp_lib:
   vcx_path = 'lib_mpir_cxx\\' + vcx_name + '.vcxproj'
   props_path='lib_mpir_cxx\\' + '_project.props'
   th = hf_list +  ('mpirxx.h',)
-  gen_filter(vcx_path + '.filters', th, cc_src_list, '')
+  gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
+             th, cc_src_list, '', g_filters_tools_version)
   gen_vcxproj(proj_name, vcx_path, guid, config, mode, lib_type, True, th, cc_src_list, '')
   gen_project_props(props_path, guid, config, mode, lib_type, True, th, cc_src_list, '')
   add_proj_to_sln('mpir.sln', '', vcx_name, vcx_path, guid)
