@@ -551,16 +551,13 @@ for n in n_list:
   vcx_path = 'dll_mpir_' + cf + '\\' + vcx_name + '.vcxproj'
   props_path='dll_mpir_' + cf + '\\_' + vcx_name + '.props'
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
-             hf_list,
-             c_src_list + cc_src_list + mpn_f[1], af_list,
+             hf_list, c_src_list + cc_src_list + mpn_f[1], af_list,
              g_filters_tools_version)
-  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
-              guid, mode, dll_type,
+  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir, guid, mode, dll_type,
               app_str, g_tool_char_set_lines, g_project_tools_version,
               False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, build_dir, mp_dir, add_prebuild, False, af_list)
-  add_proj_to_sln(solution_name, solution_dir, '', 
-                  vcx_name, vcx_path, guid,
+  add_proj_to_sln(solution_name, solution_dir, '', vcx_name, vcx_path, guid,
                   g_sln_studio_version_short, g_sln_studio_version_long)
 
   # set up LIB build
@@ -571,13 +568,11 @@ for n in n_list:
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
              hf_list, c_src_list + mpn_f[1], af_list,
              g_filters_tools_version)
-  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
-              guid, mode, lib_type,
+  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir, guid, mode, lib_type,
               app_str, g_tool_char_set_lines, g_project_tools_version,
               False, hf_list, c_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, build_dir, mp_dir, add_prebuild, False, af_list)
-  add_proj_to_sln(solution_name, solution_dir, '', 
-                  vcx_name, vcx_path, guid,
+  add_proj_to_sln(solution_name, solution_dir, '', vcx_name, vcx_path, guid,
                   g_sln_studio_version_short, g_sln_studio_version_long)
 
 # C++ library build
@@ -591,14 +586,13 @@ if add_cpp_lib:
   props_path='lib_mpir_cxx\\_' + vcx_name + '.props'
   th = hf_list +  ('mpirxx.h',)
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
-             th, cc_src_list, '', g_filters_tools_version)
-  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
-              guid, mode, lib_type,
+             th, cc_src_list, '',
+             g_filters_tools_version)
+  gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir, guid, mode, lib_type,
               app_str, g_tool_char_set_lines, g_project_tools_version,
               True, th, cc_src_list, '')
   gen_project_props(props_path, build_dir, config, add_prebuild, True, '')
-  add_proj_to_sln('mpir.sln', solution_dir, '', 
-                  vcx_name, vcx_path, guid,
+  add_proj_to_sln('mpir.sln', solution_dir, '', vcx_name, vcx_path, guid,
                   g_sln_studio_version_short, g_sln_studio_version_long)
 
 # the following code is for diagnostic purposes only
