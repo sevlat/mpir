@@ -598,7 +598,7 @@ def vcx_tool_options(config, plat, proj_type, is_cpp, af_list, outf):
       if add_prebuild and not is_cpp:
         vcx_pre_build(config, pl, outf)
       if af_list:
-        yasm_options(plat, proj_type, outf)
+        yasm_options(pl, proj_type, outf)
       compiler_options(pl, proj_type, is_debug, outf)
       if proj_type != lib_type:
         linker_options(outf)
