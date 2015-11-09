@@ -86,7 +86,7 @@ def vcx_file_version(outf):
 '''
   outf.write(f1)
 
-def vcx_tool_options(plat, proj_type, is_cpp, af_list, outf):
+def vcx_tool_options(plat, proj_type, is_cpp, outf):
 
   f1 = r'''  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" />
 '''
@@ -176,7 +176,7 @@ def gen_vcxproj(proj_name, file_name, mpir_dir, build_dir,
     vcx_user_props(plat, outf)
     outf.write(f2)
     vcx_file_version(outf)
-    vcx_tool_options(plat, proj_type, is_cpp, af_list, outf)
+    vcx_tool_options(plat, proj_type, is_cpp, outf)
     if hf_list:
       vcx_hdr_items(hf_list, relp, outf)
     vcx_c_items(cf_list, plat, relp, outf)
