@@ -36,7 +36,7 @@
   <PropertyGroup>
     <!-- Imported BEFORE others props-->
     <!-- Property sheets specific for each project.-->
-    <MPIR_Props_Primary>$(MPIR_ProjectDir)$(ProjectName).primary.props</MPIR_Props_Primary>
+    <MPIR_Props_Primary>$(MPIR_ProjectDir)_$(ProjectName).props</MPIR_Props_Primary>
   </PropertyGroup>
 
   <PropertyGroup>

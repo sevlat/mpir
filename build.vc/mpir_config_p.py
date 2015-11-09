@@ -550,7 +550,7 @@ for n in n_list:
   guid = '{' + str(uuid4()) + '}'
   vcx_name = 'dll_mpir_' + cf
   vcx_path = 'dll_mpir_' + cf + '\\' + vcx_name + '.vcxproj'
-  props_path='dll_mpir_' + cf + '\\' + vcx_name + '.primary.props'
+  props_path='dll_mpir_' + cf + '\\_' + vcx_name + '.props'
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
              hf_list,
              c_src_list + cc_src_list + mpn_f[1], af_list,
@@ -569,7 +569,7 @@ for n in n_list:
   guid = '{' + str(uuid4()) + '}'
   vcx_name = 'lib_mpir_' + cf
   vcx_path = 'lib_mpir_' + cf + '\\' + vcx_name + '.vcxproj'
-  props_path='lib_mpir_' + cf + '\\' + vcx_name + '.primary.props'
+  props_path='lib_mpir_' + cf + '\\_' + vcx_name + '.props'
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
              hf_list, c_src_list + mpn_f[1], af_list,
              g_filters_tools_version)
@@ -591,7 +591,7 @@ if add_cpp_lib:
   mode = ('Win32', 'x64')
   vcx_name = 'lib_mpir_cxx'
   vcx_path = 'lib_mpir_cxx\\' + vcx_name + '.vcxproj'
-  props_path='lib_mpir_cxx\\' + vcx_name + '.primary.props'
+  props_path='lib_mpir_cxx\\_' + vcx_name + '.props'
   th = hf_list +  ('mpirxx.h',)
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
              th, cc_src_list, '', g_filters_tools_version)
