@@ -559,7 +559,7 @@ for n in n_list:
               app_str, g_tool_char_set_lines, g_project_tools_version,
               False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, build_dir, mp_dir, dll_type, add_prebuild,
-                    False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
+                    False, af_list)
   add_proj_to_sln(solution_name, solution_dir, '', 
                   vcx_name, vcx_path, guid,
                   g_sln_studio_version_short, g_sln_studio_version_long)
@@ -577,7 +577,7 @@ for n in n_list:
               app_str, g_tool_char_set_lines, g_project_tools_version,
               False, hf_list, c_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, build_dir, mp_dir, lib_type, add_prebuild,
-                    False, hf_list, c_src_list + mpn_f[1], af_list)
+                    False, af_list)
   add_proj_to_sln(solution_name, solution_dir, '', 
                   vcx_name, vcx_path, guid,
                   g_sln_studio_version_short, g_sln_studio_version_long)
@@ -599,7 +599,7 @@ if add_cpp_lib:
               app_str, g_tool_char_set_lines, g_project_tools_version,
               True, th, cc_src_list, '')
   gen_project_props(props_path, build_dir, config, lib_type, add_prebuild,
-                    True, th, cc_src_list, '')
+                    True, '')
   add_proj_to_sln('mpir.sln', solution_dir, '', 
                   vcx_name, vcx_path, guid,
                   g_sln_studio_version_short, g_sln_studio_version_long)

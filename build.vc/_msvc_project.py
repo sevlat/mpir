@@ -229,7 +229,7 @@ def write_project_props(file_name, build_dir, usermacros):
 
 
 def gen_project_props(file_name, build_dir, config, proj_type, add_prebuild,
-                      is_cpp, hf_list, cf_list, af_list):
+                      is_cpp, af_list):
   usermacros=[]
   if is_cpp:
     usermacros.append(('MPIR_Is_Cpp', 'True'))
