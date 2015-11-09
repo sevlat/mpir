@@ -90,7 +90,6 @@ except NameError:
   pass
 app_type, lib_type, dll_type = 0, 1, 2
 app_str = ('Application', 'StaticLibrary', 'DynamicLibrary')
-app_ext = ('.exe', '.lib', '.dll')
 
 # for script debugging
 debug = False
@@ -556,7 +555,7 @@ for n in n_list:
              c_src_list + cc_src_list + mpn_f[1], af_list,
              g_filters_tools_version)
   gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
-              guid, mp_dir, mode, dll_type,
+              guid, mode, dll_type,
               app_str, g_tool_char_set_lines, g_project_tools_version,
               False, hf_list, c_src_list + cc_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, build_dir, guid, mp_dir, mode, dll_type, add_prebuild,
@@ -574,7 +573,7 @@ for n in n_list:
              hf_list, c_src_list + mpn_f[1], af_list,
              g_filters_tools_version)
   gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
-              guid, mp_dir, mode, lib_type,
+              guid, mode, lib_type,
               app_str, g_tool_char_set_lines, g_project_tools_version,
               False, hf_list, c_src_list + mpn_f[1], af_list)
   gen_project_props(props_path, build_dir, guid, mp_dir, mode, lib_type, add_prebuild,
@@ -596,7 +595,7 @@ if add_cpp_lib:
   gen_filter(vcx_path + '.filters', mpir_dir, build_dir,
              th, cc_src_list, '', g_filters_tools_version)
   gen_vcxproj(proj_name, vcx_path, mpir_dir, build_dir,
-              guid, config, mode, lib_type,
+              guid, mode, lib_type,
               app_str, g_tool_char_set_lines, g_project_tools_version,
               True, th, cc_src_list, '')
   gen_project_props(props_path, build_dir, guid, config, mode, lib_type, add_prebuild,

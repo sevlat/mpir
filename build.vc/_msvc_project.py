@@ -140,7 +140,7 @@ def vcx_a_items(af_list, relp, outf):
   outf.write(f3)
 
 def gen_vcxproj(proj_name, file_name, mpir_dir, build_dir,
-                guid, config, plat, proj_type,
+                guid, plat, proj_type,
                 app_str, tool_char_set_lines, tools_ver,
                 is_cpp, hf_list, cf_list, af_list):
 
