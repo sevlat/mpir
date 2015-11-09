@@ -228,7 +228,7 @@ def write_project_props(file_name, build_dir, usermacros):
     outf.write(f5)
 
 
-def gen_project_props(file_name, build_dir, config, proj_type, add_prebuild,
+def gen_project_props(file_name, build_dir, config, add_prebuild,
                       is_cpp, af_list):
   usermacros=[]
   if is_cpp:
