@@ -15,11 +15,7 @@
 
 
   <ImportGroup Label="PropertySheets">
-    <Import Condition="exists('$(MPIR_Props_PreExternal)')"        Project="$(MPIR_Props_PreExternal)"           />
-  </ImportGroup>
-
-  <ImportGroup Label="PropertySheets">
-    <Import Condition="exists('$(MPIR_Props_PreProject)')"         Project="$(MPIR_Props_PreProject)"            />
+    <Import Condition="exists('$(MPIR_Props_Primary)')"            Project="$(MPIR_Props_Primary)"               />
   </ImportGroup>
 
 

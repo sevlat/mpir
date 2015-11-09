@@ -36,14 +36,12 @@
   <PropertyGroup>
     <!-- Imported BEFORE others props-->
     <!-- Property sheets specific for each project.-->
-    <MPIR_ProjectPrePropsPrefix>$(MPIR_ProjectDir)_project</MPIR_ProjectPrePropsPrefix>
-
-    <MPIR_Props_PreProject      >$(MPIR_ProjectPrePropsPrefix).props</MPIR_Props_PreProject>
+    <MPIR_Props_Primary>$(MPIR_ProjectDir)$(ProjectName).primary.props</MPIR_Props_Primary>
   </PropertyGroup>
 
   <PropertyGroup>
     <!-- Property sheets specific for each project. -->
-    <MPIR_ProjectPropsPrefix   >$(MPIR_ProjectDir)project</MPIR_ProjectPropsPrefix>
+    <MPIR_ProjectPropsPrefix   >$(MPIR_ProjectDir)$(ProjectName)</MPIR_ProjectPropsPrefix>
 
     <MPIR_Props_Project           >$(MPIR_ProjectPropsPrefix).props</MPIR_Props_Project>
     <MPIR_Props_ProjectConf       >$(MPIR_ProjectPropsPrefix).$(_MPIR_ConfLow).props</MPIR_Props_ProjectConf>
