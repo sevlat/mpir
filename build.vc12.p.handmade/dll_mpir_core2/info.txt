@@ -1,2 +1,0 @@
-Project property sheets files appears to be empty. So they may be deleted.
-I have delete all project property sheets, except this directory
