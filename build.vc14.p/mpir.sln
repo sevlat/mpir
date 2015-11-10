@@ -1,0 +1,43 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_gc", "dll_mpir_gc\dll_mpir_gc.vcxproj", "{34f69690-8792-4d49-a71d-91db4557a3bc}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_core2", "dll_mpir_core2\dll_mpir_core2.vcxproj", "{8034ec8d-1d90-4beb-8aa7-dd419c2b88e3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_gc", "lib_mpir_gc\lib_mpir_gc.vcxproj", "{f83b1a69-0997-4555-afef-7371747ec23b}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_p3", "lib_mpir_p3\lib_mpir_p3.vcxproj", "{d3cc7764-b930-4bb1-97a3-7ddd1e623287}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_k8", "lib_mpir_k8\lib_mpir_k8.vcxproj", "{e6560766-9023-486b-8cba-af86d0eb5692}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_core2", "lib_mpir_core2\lib_mpir_core2.vcxproj", "{8ca604c1-94f5-43db-afe0-86a3b4228b15}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_sandybridge", "dll_mpir_sandybridge\dll_mpir_sandybridge.vcxproj", "{c0e8518f-48c7-4ce9-a1bc-1c9e51d79559}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_nehalem", "dll_mpir_nehalem\dll_mpir_nehalem.vcxproj", "{d39ba29d-3995-4be8-8600-7eea6532a0f6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_nehalem", "lib_mpir_nehalem\lib_mpir_nehalem.vcxproj", "{c91c4abb-167a-498d-a265-9b3e4a9659c8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_p3", "dll_mpir_p3\dll_mpir_p3.vcxproj", "{00b673bc-86c6-4d87-a21a-400876bba46c}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dll_mpir_k8", "dll_mpir_k8\dll_mpir_k8.vcxproj", "{6a8ed066-f441-40a5-95cb-d5782e00440b}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_sandybridge", "lib_mpir_sandybridge\lib_mpir_sandybridge.vcxproj", "{999008de-848f-4b01-9f07-882eac29cb22}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_mpir_cxx", "lib_mpir_cxx\lib_mpir_cxx.vcxproj", "{f78211e2-35db-4a82-b93a-9148889857b8}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Win32 = Debug|Win32
+        Debug|x64 = Debug|x64
+        Release|Win32 = Release|Win32
+        Release|x64 = Release|x64
+    EndGlobalSection
+    GlobalSection(SolutionProperties) = preSolution
+        HideSolutionNode = FALSE
+    EndGlobalSection
+    GlobalSection(NestedProjects) = preSolution
+    EndGlobalSection
+EndGlobal
