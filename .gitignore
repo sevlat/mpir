@@ -170,9 +170,6 @@ pip-log.txt
 *.a
 *.la
 .libs
-mpn/*.c
-mpn/*.as
-mpn/*.asm
 Makefile
 mpir.h
 config.h
@@ -182,19 +179,8 @@ config.status
 libtool
 stamp-h1
 autom4te.cache/
-yasm/YASM-VERSION-FILE
-yasm/YASM-VERSION.h
-yasm/autom4te.cache/
-yasm/.deps/
-yasm/results
-yasm/config/config.guess
-yasm/config/config.sub
-yasm/configure.gnu
-yasm/configure.lineno
-yasm/libyasm-stdint.h
-yasm/po/Makefile.in
-yasm/po/POTFILES
-yasm/stamp-h1
+
+
 yasm_mac.inc
 gmp.h
 longlong.h
@@ -202,46 +188,22 @@ gmp-mparam.h
 tune/sqr_basecase.c
 autoscript
 
-/build.vc11/output_params.bat
-/build.vc11/mpir-tests/test-config.props
 
-/build.vc12/output_params.bat
+/build.vc1[0-9]*/output_params.bat
+/build.vc1[0-9]*/mpir-tests/test-config.props
 
-/build.vc12/mpir-tests/test-config.props
-/mpn/x86_64w/bulldozer/piledriver
+/build.vc1[0-9]*/dll_mpir_k8/
+/build.vc1[0-9]*/lib_mpir_k8/
+
+/build.vc1[0-9]*/dll_mpir_nehalem/
+/build.vc1[0-9]*/lib_mpir_nehalem/
+
+/build.vc1[0-9]*/dll_mpir_sandybridge/
+/build.vc1[0-9]*/lib_mpir_sandybridge/
+
+/build.vc1[0-9]*/dll_mpir_sandybridge_ivybridge/
+/build.vc1[0-9]*/lib_mpir_sandybridge_ivybridge/
+
+
 bulldozer
-/mpn/x86_64w/haswell
-/build.vc10/lib_mpir_sandybridge_ivybridge
-/build.vc10/dll_mpir_k8
-/build.vc10/dll_mpir_nehalem
-/build.vc10/dll_mpir_sandybridge
-/build.vc10/dll_mpir_sandybridge_ivybridge
-/build.vc10/lib_mpir_k8
-/build.vc10/lib_mpir_nehalem
-/build.vc10/lib_mpir_sandybridge
-# lib_mpir_sandybridge_ivybridge
-# dll_mpir_k8
-# dll_mpir_nehalem
-# dll_mpir_sandybridge
-# dll_mpir_sandybridge_ivybridge
-# lib_mpir_k8
-# lib_mpir_nehalem
-# lib_mpir_sandybridge
-# dll_mpir_sandybridge
-# lib_mpir_k8
-# lib_mpir_nehalem
-# lib_mpir_sandybridge
-# dll_mpir_k8
-# dll_mpir_nehalem
-# dll_mpir_nehalem
-# dll_mpir_sandybridge
-# lib_mpir_k8
-# lib_mpir_nehalem
-# lib_mpir_sandybridge
-# dll_mpir_k8
-/mpn/x86w/p0/gmp-mparam.h
-/mpn/x86w/p3/gmp-mparam.h
-/mpn/x86w/p4/gmp-mparam.h
-/mpn/x86w/p6/mmx/gmp-mparam.h
-/mpn/x86w/p6/gmp-mparam.h
-/mpn/x86w/pentium4/gmp-mparam.h
+

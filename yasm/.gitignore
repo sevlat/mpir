@@ -1,0 +1,13 @@
+YASM-VERSION-FILE
+YASM-VERSION.h
+autom4te.cache/
+.deps/
+results
+config/config.guess
+config/config.sub
+configure.gnu
+configure.lineno
+libyasm-stdint.h
+po/Makefile.in
+po/POTFILES
+stamp-h1
