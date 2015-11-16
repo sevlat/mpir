@@ -339,7 +339,7 @@ def filter_headers(hdr_list, relp, outf):
 '''
   f2 = r'''    <ClInclude Include="{}{}">
     <Filter>Header Files</Filter>
-    </ClInclude>
+  </ClInclude>
 '''
   f3 = r'''  </ItemGroup>
 '''
@@ -354,11 +354,11 @@ def filter_csrc(cf_list, relp, outf):
 '''
   f2 = r'''  <ClCompile Include="{}{}">
     <Filter>Source Files</Filter>
-    </ClCompile>
+  </ClCompile>
 '''
   f3 = r'''  <ClCompile Include="{}{}\{}">
     <Filter>Source Files\{}</Filter>
-    </ClCompile>
+  </ClCompile>
 '''
   f4 = r'''  </ItemGroup>
 '''
@@ -377,7 +377,7 @@ def filter_asrc(af_list, relp, outf):
 '''
   f2 = r'''  <YASM Include="{0:s}{2:s}\{1:s}">
     <Filter>Source Files\mpn\yasm</Filter>
-    </YASM>
+  </YASM>
 '''
   f3 = r'''  </ItemGroup>
 '''
@@ -393,7 +393,7 @@ def gen_filter(name, hf_list, cf_list, af_list):
 '''.format(g_filters_tools_version)
   f2 = r'''  <ItemGroup>
     <None Include="..\..\gmp-h.in" />
-    </ItemGroup>
+  </ItemGroup>
 </Project>
 '''
 
@@ -421,8 +421,8 @@ def vcx_proj_cfg(plat, outf):
   f1 = r'''  <ItemGroup Label="ProjectConfigurations">
 '''
   f2 = r'''    <ProjectConfiguration Include="{1:s}|{0:s}">
-    <Configuration>{1:s}</Configuration>
-    <Platform>{0:s}</Platform>
+      <Configuration>{1:s}</Configuration>
+      <Platform>{0:s}</Platform>
     </ProjectConfiguration>
 '''
   f3 = r'''  </ItemGroup>
@@ -439,7 +439,7 @@ def vcx_globals(name, guid, outf):
     <RootNamespace>{0:s}</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{1:s}</ProjectGuid>
-    </PropertyGroup>
+  </PropertyGroup>
 '''
   outf.write(f1.format(name, guid))
 
@@ -454,7 +454,7 @@ def vcx_library_type(plat, proj_type, outf):
   f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{arg_conf}|{arg_platf}'" Label="Configuration">
     <ConfigurationType>{arg_conftype}</ConfigurationType>{arg_tool_char_set_lines}
     <UseDebugLibraries>{arg_is_debug}</UseDebugLibraries>
-    </PropertyGroup>
+  </PropertyGroup>
 '''
 
   for pl in plat:
@@ -485,7 +485,7 @@ def vcx_extensions(outf):
 
   f1 = r'''  <ImportGroup Label="ExtensionSettings">
     <Import Project="..\vsyasm.props" />
-    </ImportGroup>
+  </ImportGroup>
 '''
   outf.write(f1)
 
@@ -493,7 +493,7 @@ def vcx_user_props(plat, outf):
 
   f1 = r'''  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
-    </ImportGroup>
+  </ImportGroup>
 '''
   for pl in plat:
     for conf in ('Release', 'Debug'):
@@ -518,19 +518,19 @@ def vcx_target_name_and_dirs(name, plat, proj_type, outf):
 
 def yasm_options(plat, proj_type, outf):
 
-  f1 = r'''    <YASM>
+  f1 = r'''  <YASM>
     <Defines>{0:s}</Defines>
     <IncludePaths>..\..\mpn\x86{1:s}w\</IncludePaths>
     <Debug>true</Debug>
     <ObjectFile>$(IntDir)mpn\</ObjectFile>
-    </YASM>
+  </YASM>
 '''
 
   outf.write(f1.format('DLL' if proj_type == dll_type else '', '' if plat == 'Win32' else '_64'))
 
 def compiler_options(plat, proj_type, is_debug, outf):
 
-  f1 = r'''    <ClCompile>
+  f1 = r'''  <ClCompile>
     <Optimization>{0:s}</Optimization>
     <IntrinsicFunctions>true</IntrinsicFunctions>
     <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
@@ -539,7 +539,7 @@ def compiler_options(plat, proj_type, is_debug, outf):
     <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
     <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     <ObjectFileName>$(IntDir)Dum\my\%(RelativeDir)</ObjectFileName>
-    </ClCompile>
+  </ClCompile>
 '''
 
   if proj_type == app_type:
@@ -563,31 +563,31 @@ def compiler_options(plat, proj_type, is_debug, outf):
 
 def linker_options(outf):
 
-  f1 = r'''    <Link>
+  f1 = r'''  <Link>
     <GenerateDebugInformation>true</GenerateDebugInformation>
     <LargeAddressAware>true</LargeAddressAware>
-    </Link>
+  </Link>
 '''
   outf.write(f1)
 
 def vcx_pre_build(name, plat, outf):
 
-  f1 = r'''    <PreBuildEvent>
+  f1 = r'''  <PreBuildEvent>
     <Command>cd ..\
 prebuild {0:s} {1:s}
     </Command>
-    </PreBuildEvent>
+  </PreBuildEvent>
 '''
   outf.write(f1.format(name, plat))
 
 def vcx_post_build(is_cpp, outf):
 
   f1 = r'''
-    <PostBuildEvent>
+  <PostBuildEvent>
     <Command>cd ..\
 postbuild "$(TargetPath)"
     </Command>
-    </PostBuildEvent>
+  </PostBuildEvent>
 '''
 
   outf.write(f1)
@@ -667,12 +667,12 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
 '''
   f4 = r'''  <ImportGroup Label="ExtensionTargets">
     <Import Project="..\vsyasm.targets" />
-    </ImportGroup>
+  </ImportGroup>
 '''
 
-  f5 = r'''<ItemGroup>
+  f5 = r'''  <ItemGroup>
     <None Include="..\..\gmp-h.in" />
-    </ItemGroup>
+  </ItemGroup>
 </Project>
 '''
 
