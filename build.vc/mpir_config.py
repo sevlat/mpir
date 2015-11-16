@@ -29,10 +29,8 @@ if g_studio_version=='10':
   g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
   g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
 
-  g_character_set_line       = r'''
+  g_tool_char_set_lines      = r'''
     <CharacterSet>MultiByte</CharacterSet>'''
-
-  g_platform_toolset_line    = ''
 
 elif g_studio_version=='11':
   g_project_tools_version    = '4.0'           # Project file ToolsVersion
@@ -40,9 +38,7 @@ elif g_studio_version=='11':
   g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
   g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
 
-  g_character_set_line       = ''
-
-  g_platform_toolset_line    = r'''
+  g_tool_char_set_lines      = r'''
     <PlatformToolset>v110</PlatformToolset>'''
 
 elif g_studio_version=='12':
@@ -51,9 +47,7 @@ elif g_studio_version=='12':
   g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
   g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
 
-  g_character_set_line       = ''
-
-  g_platform_toolset_line    = r'''
+  g_tool_char_set_lines      = r'''
     <PlatformToolset>v120</PlatformToolset>'''
 
 elif g_studio_version=='14':
@@ -62,9 +56,7 @@ elif g_studio_version=='14':
   g_sln_studio_version_short = '14'            # Solution Visual Studio Version 
   g_sln_studio_version_long  = '14.0.22823.1'  # Solution Visual Studio Version 
 
-  g_character_set_line       = ''
-
-  g_platform_toolset_line    = r'''
+  g_tool_char_set_lines      = r'''
     <PlatformToolset>v140</PlatformToolset>'''
 
 else:
@@ -459,16 +451,21 @@ def vcx_default_cpp_props(outf):
 
 def vcx_library_type(plat, proj_type, outf):
 
-  f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="Configuration">
-    <ConfigurationType>{2:s}</ConfigurationType>{platform_toolset_line}{character_set_line}
+  f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{arg_conf}|{arg_platf}'" Label="Configuration">
+    <ConfigurationType>{arg_conftype}</ConfigurationType>{arg_tool_char_set_lines}
+    <UseDebugLibraries>{arg_is_debug}</UseDebugLibraries>
     </PropertyGroup>
 '''
 
   for pl in plat:
-    for conf in ('Release', 'Debug'):
-      outf.write(f1.format(pl, conf, app_str[proj_type],
-                           platform_toolset_line=g_platform_toolset_line,
-                           character_set_line=g_character_set_line))
+    for is_debug in (False, True):
+      sPG=f1.format(arg_conf               =('Debug' if is_debug else 'Release'),
+                    arg_platf              =pl,
+                    arg_conftype           =app_str[proj_type],
+                    arg_tool_char_set_lines=g_tool_char_set_lines,
+                    arg_is_debug           =('true' if is_debug else 'false'))
+
+      outf.write(sPG)
 
 def vcx_cpp_props(outf):
 
