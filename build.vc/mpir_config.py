@@ -518,28 +518,28 @@ def vcx_target_name_and_dirs(name, plat, proj_type, outf):
 
 def yasm_options(plat, proj_type, outf):
 
-  f1 = r'''  <YASM>
-    <Defines>{0:s}</Defines>
-    <IncludePaths>..\..\mpn\x86{1:s}w\</IncludePaths>
-    <Debug>true</Debug>
-    <ObjectFile>$(IntDir)mpn\</ObjectFile>
-  </YASM>
+  f1 = r'''    <YASM>
+      <Defines>{0:s}</Defines>
+      <IncludePaths>..\..\mpn\x86{1:s}w\</IncludePaths>
+      <Debug>true</Debug>
+      <ObjectFile>$(IntDir)mpn\</ObjectFile>
+    </YASM>
 '''
 
   outf.write(f1.format('DLL' if proj_type == dll_type else '', '' if plat == 'Win32' else '_64'))
 
 def compiler_options(plat, proj_type, is_debug, outf):
 
-  f1 = r'''  <ClCompile>
-    <Optimization>{0:s}</Optimization>
-    <IntrinsicFunctions>true</IntrinsicFunctions>
-    <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
-    <PreprocessorDefinitions>{1:s}%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    <RuntimeLibrary>MultiThreaded{2:s}</RuntimeLibrary>
-    <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
-    <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-    <ObjectFileName>$(IntDir)Dum\my\%(RelativeDir)</ObjectFileName>
-  </ClCompile>
+  f1 = r'''    <ClCompile>
+      <Optimization>{0:s}</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>{1:s}%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded{2:s}</RuntimeLibrary>
+      <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ObjectFileName>$(IntDir)Dum\my\%(RelativeDir)</ObjectFileName>
+    </ClCompile>
 '''
 
   if proj_type == app_type:
@@ -563,31 +563,31 @@ def compiler_options(plat, proj_type, is_debug, outf):
 
 def linker_options(outf):
 
-  f1 = r'''  <Link>
-    <GenerateDebugInformation>true</GenerateDebugInformation>
-    <LargeAddressAware>true</LargeAddressAware>
-  </Link>
+  f1 = r'''    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
 '''
   outf.write(f1)
 
 def vcx_pre_build(name, plat, outf):
 
-  f1 = r'''  <PreBuildEvent>
-    <Command>cd ..\
+  f1 = r'''    <PreBuildEvent>
+      <Command>cd ..\
 prebuild {0:s} {1:s}
-    </Command>
-  </PreBuildEvent>
+      </Command>
+    </PreBuildEvent>
 '''
   outf.write(f1.format(name, plat))
 
 def vcx_post_build(is_cpp, outf):
 
   f1 = r'''
-  <PostBuildEvent>
-    <Command>cd ..\
+    <PostBuildEvent>
+      <Command>cd ..\
 postbuild "$(TargetPath)"
-    </Command>
-  </PostBuildEvent>
+      </Command>
+    </PostBuildEvent>
 '''
 
   outf.write(f1)
