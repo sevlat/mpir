@@ -467,6 +467,14 @@ def vcx_library_type(plat, proj_type, outf):
 
       outf.write(sPG)
 
+def vcx_external_props(outf):
+
+  f1 = r'''  <ImportGroup>
+    <Import Condition="exists('$(MPIR_Props_External)')" Project="$(MPIR_Props_External)" />
+  </ImportGroup>
+'''
+  outf.write(f1)
+
 def vcx_cpp_props(outf):
 
   f1 = r'''  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -683,6 +691,7 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
     outf.write(f2)
     vcx_target_name_and_dirs(proj_name, plat, proj_type, outf)
     vcx_tool_options(config, plat, proj_type, is_cpp, af_list, outf)
+    vcx_external_props(outf)
     if hf_list:
       vcx_hdr_items(hf_list, relp, outf)
     vcx_c_items(cf_list, plat, relp, outf)
