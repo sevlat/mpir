@@ -122,11 +122,11 @@ def find_asm(path, cf_list):
     relr = relpath(root, mpir_dir)      # path from MPIR root
     if relp == '.':                     # set C files as default
       relp = h = t = ''
-      d[''] = [ [], deepcopy(cf_list), [], [], relr ]
+      d[''] = [[], deepcopy(cf_list), [], [], relr]
     else:
       h, _ = split(relp)                # h = parent, t = this directory
       # copy defaults from this directories parent
-      d[relp] = [ deepcopy(d[h][0]), deepcopy(d[h][1]),
+      d[relp] = [deepcopy(d[h][0]), deepcopy(d[h][1]),
                  deepcopy(d[h][2]), deepcopy(d[h][3]), relr]
     for f in files:                     # for the files in this directory
       n, x = splitext(f)
@@ -169,8 +169,8 @@ def find_asm(path, cf_list):
 
 def find_src(dir_list):
   # list number from file extension
-  di = { '.h': 0, '.c': 1, '.cc': 2, '.cpp': 2, '.asm': 3, '.as': 3 }
-  list = [ [], [], [], [] ]
+  di = {'.h': 0, '.c': 1, '.cc': 2, '.cpp': 2, '.asm': 3, '.as': 3}
+  list = [[], [], [], []]
   for d in dir_list:
     for f in listdir(join(mpir_dir, d)):
       if f == '.svn':
@@ -248,7 +248,7 @@ def gen_have_list(c, sym_dir, out_dir):
 #     for sym in sorted(set_sym3):
 #       print(sym, file=outf)
 
-# generate Visual Studio 2010 IDE Filter
+# generate Visual Studio IDE Filter
 
 def filter_folders(cf_list, af_list, outf):
 
@@ -758,7 +758,7 @@ if t[2] or t[3]:
     print()
 
 # prepare the generic C build
-mpn_gc = dict((('gc',[ gc_hdr_list, gc_src_list, [], [] ]),))
+mpn_gc = dict((('gc', [gc_hdr_list, gc_src_list, [], []]),))
 
 # prepare the list of Win32 builds
 mpn_32 = find_asm(mpir_dir + 'mpn/x86w', gc_src_list)
@@ -937,6 +937,7 @@ for n in n_list:
       break
   else:
     mp_dir = config
+
   proj_name = 'mpir'
   cf = config.replace('\\', '_')
 
@@ -1008,7 +1009,7 @@ if debug:
 
 if debug:
 
-  mpn_dirs =  ('mpn/generic', 'mpn/x86_64w', 'mpn/x86w' )
+  mpn_dirs =  ('mpn/generic', 'mpn/x86_64w', 'mpn/x86w')
 
   # compile a list of files in directories in 'dl' under root 'r' with extension 'p'
   def findf(r, dl, p):
@@ -1019,7 +1020,7 @@ if debug:
         if '.svn' in dirs:
           dirs.remove('.svn')            # ignore SVN directories
         if d == '' or root.endswith(build_vc):
-          for d in reversed(dirs):       # don't scan build.vc10 subdirectories
+          for d in reversed(dirs):       # don't scan own build.vcNN subdirectories
             dirs.remove(d)
         for f in files:
           if f.endswith(p):
