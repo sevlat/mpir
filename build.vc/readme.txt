@@ -18,10 +18,12 @@ And also some errors fixed:
 --------------------------------------------------------------------------------
 Embedding external property sheet.
 
-User may define property MPIR_Props_External
-(for example, in MSBUILD command line) to pass a name of his own property sheet,
-that will be imported after all others property sheets.
-This is a way to customize project building, without editing downloaded MPIR files.
+User may create his own property sheet that will change some project settings.
+To embed this property sheet into building process one need to define property
+MPIR_Props_External (for example, in MSBUILD command line). MPIR_Props_External should
+contain path to this property sheet file. Path must be absolute or relative to vcxproj.
+This property sheet will be imported by vcxproj after all others property sheets.
+So, this is a way to customize project building, without editing downloaded MPIR files.
 
 Example:
 msbuild.exe /P:MPIR_Props_External=d:\MyWork\MyProps.props mpir\build.vc11\dll_mpir_gc\dll_mpir_gc.vcxproj
