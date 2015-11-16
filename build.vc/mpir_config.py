@@ -17,7 +17,24 @@ from re import compile, search
 from collections import defaultdict
 from uuid import uuid4
 from time import sleep
+
+
+g_studio_version           = '10'            # Studio version
+g_project_tools_version    = '4.0'           # Project file ToolsVersion
+g_filters_tools_version    = '4.0'           # Filters file ToolsVersion
+g_sln_studio_version_short = '2013'          # Solution Visual Studio Version 
+g_sln_studio_version_long  = '12.0.30626.0'  # Solution Visual Studio Version 
+
+g_character_set_line       = r'''
+    <CharacterSet>MultiByte</CharacterSet>'''
+
+g_platform_toolset_line    = ''
+
+
 solution_name = 'mpir.sln'
+
+build_vc_dir_name = 'build.vc{0}'.format(g_studio_version)
+
 try:
   input = raw_input
 except NameError:
@@ -34,14 +51,14 @@ add_prebuild = True
 add_cpp_lib = False
 
 # The path to the mpir root directory
-build_vc = 'build.vc10/'
+build_vc = build_vc_dir_name+'/'
 mpir_dir = '../'
 build_dir = mpir_dir + build_vc
 cfg_dir = './cdata'
 solution_dir = join(mpir_dir, build_vc)
 
 # paths that might include source files(*.c, *.h, *.asm)
-c_directories = ('', 'build.vc12', 'fft', 'mpf', 'mpq', 'mpz',
+c_directories = ('', build_vc_dir_name, 'fft', 'mpf', 'mpq', 'mpz',
                  'printf', 'scanf')
 
 # files that are to be excluded from the build
@@ -328,8 +345,8 @@ def filter_asrc(af_list, relp, outf):
 def gen_filter(name, hf_list, cf_list, af_list):
 
   f1 = r'''<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-'''
+<Project ToolsVersion="{0}" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+'''.format(g_filters_tools_version)
   f2 = r'''  <ItemGroup>
     <None Include="..\..\gmp-h.in" />
     </ItemGroup>
@@ -391,13 +408,15 @@ def vcx_default_cpp_props(outf):
 def vcx_library_type(plat, proj_type, outf):
 
   f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{1:s}|{0:s}'" Label="Configuration">
-    <ConfigurationType>{2:s}</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
+    <ConfigurationType>{2:s}</ConfigurationType>{platform_toolset_line}{character_set_line}
     </PropertyGroup>
 '''
+
   for pl in plat:
     for conf in ('Release', 'Debug'):
-      outf.write(f1.format(pl, conf, app_str[proj_type]))
+      outf.write(f1.format(pl, conf, app_str[proj_type],
+                           platform_toolset_line=g_platform_toolset_line,
+                           character_set_line=g_character_set_line))
 
 def vcx_cpp_props(outf):
 
@@ -590,8 +609,8 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
                 is_cpp, hf_list, cf_list, af_list):
 
   f1 = r'''<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-'''
+<Project DefaultTargets="Build" ToolsVersion="{0}" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+'''.format(g_project_tools_version)
   f2 = r'''  <PropertyGroup Label="UserMacros" />
 '''
   f3 = r'''  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -635,12 +654,14 @@ def gen_vcxproj(proj_name, file_name, guid, config, plat, proj_type,
 
 folder_guid = "{2150E333-8FDC-42A3-9474-1A3956D46DE8}"
 vcxproject_guid = "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
+
 s_guid = r'\s*(\{\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\})\s*'
 s_name = r'\s*\"([a-zA-Z][-.\\_a-zA-Z0-9]*\s*)\"\s*'
 re_guid = compile(r'\s*\"\s*' + s_guid + r'\"\s*')
 re_proj = compile(r'Project\s*\(\s*\"' + s_guid + r'\"\)\s*=\s*'
                   + s_name + r'\s*,\s*' + s_name + r'\s*,\s*\"' + s_guid + r'\"')
 re_fmap = compile(r'\s*' + s_guid + r'\s*=\s*' + s_guid)
+
 def read_solution_file(soln_name):
   fd, pd, p2f = {}, {}, {}
   solution_path = join(solution_dir, soln_name)
@@ -659,10 +680,11 @@ def read_solution_file(soln_name):
   return fd, pd, p2f
 
 sol_1 = '''Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30626.0
+# Visual Studio {0}
+VisualStudioVersion = {1}
 MinimumVisualStudioVersion = 10.0.40219.1
-'''
+'''.format(g_sln_studio_version_short, g_sln_studio_version_long)
+
 sol_2 = '''Project("{}") = "{}", "{}", "{}"
 EndProject
 '''
