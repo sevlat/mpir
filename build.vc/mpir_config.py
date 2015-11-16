@@ -352,13 +352,13 @@ def filter_csrc(cf_list, relp, outf):
 
   f1 = r'''  <ItemGroup>
 '''
-  f2 = r'''  <ClCompile Include="{}{}">
-    <Filter>Source Files</Filter>
-  </ClCompile>
+  f2 = r'''    <ClCompile Include="{}{}">
+      <Filter>Source Files</Filter>
+    </ClCompile>
 '''
-  f3 = r'''  <ClCompile Include="{}{}\{}">
-    <Filter>Source Files\{}</Filter>
-  </ClCompile>
+  f3 = r'''    <ClCompile Include="{}{}\{}">
+      <Filter>Source Files\{}</Filter>
+    </ClCompile>
 '''
   f4 = r'''  </ItemGroup>
 '''
@@ -538,7 +538,7 @@ def compiler_options(plat, proj_type, is_debug, outf):
       <RuntimeLibrary>MultiThreaded{2:s}</RuntimeLibrary>
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ObjectFileName>$(IntDir)Dum\my\%(RelativeDir)</ObjectFileName>
+      <ObjectFileName>$(IntDir)dum\my\%(RelativeDir)</ObjectFileName>
     </ClCompile>
 '''
 
