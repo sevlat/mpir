@@ -60,7 +60,7 @@ elif g_studio_version=='14':
     <PlatformToolset>v140</PlatformToolset>'''
 
 else:
-  print ('Visual Studio version ', g_studio_version, 'is not supported' );
+  print ('Visual Studio version ', g_studio_version, ' is not supported!' );
   exit()
 
 
@@ -454,7 +454,11 @@ def vcx_library_type(plat, proj_type, outf):
   f1 = r'''  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='{arg_conf}|{arg_platf}'" Label="Configuration">
     <ConfigurationType>{arg_conftype}</ConfigurationType>{arg_tool_char_set_lines}
     <UseDebugLibraries>{arg_is_debug}</UseDebugLibraries>
-  </PropertyGroup>
+'''
+  f2 = r'''    <WholeProgramOptimization>true</WholeProgramOptimization>
+'''
+
+  f3 = r'''  </PropertyGroup>
 '''
 
   for pl in plat:
@@ -466,6 +470,9 @@ def vcx_library_type(plat, proj_type, outf):
                     arg_is_debug           =('true' if is_debug else 'false'))
 
       outf.write(sPG)
+      if not is_debug:
+        outf.write(f2)
+      outf.write(f3)
 
 def vcx_external_props(outf):
 
